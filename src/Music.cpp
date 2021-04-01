@@ -30,7 +30,10 @@ void Music::Play(int times/*=-1*/){
 	if (IsOpen()) {
 		Stop();
 	} else if (times == -1) {
-		Mix_PlayMusic(music, -1);
+		int a = Mix_PlayMusic(music, -1);
+		if (a < 0) {
+			printError(SDL_GetError(),"Music");
+		}
 	}
 }
 void Music::Stop(int msToStop/*=1500*/){

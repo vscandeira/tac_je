@@ -18,7 +18,6 @@ void Sprite::Open(std::string file){
 	SDL_Renderer* renderer = Game::GetInstance().GetRenderer();
 	if (texture != nullptr) {
 		SDL_DestroyTexture(texture);
-		std::cout<<"textura diferente de null\n";
 	}
 	SDL_Texture* sdl = IMG_LoadTexture(renderer, file.c_str());
 	if ( sdl == nullptr) {
@@ -26,9 +25,9 @@ void Sprite::Open(std::string file){
 		return;
 	} else {
 		int a = SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
-		if (a != 0) {
-			std::cout<< "w: " <<width<< " - h: " << height<< " - retorno: " << a << "\n" ;
+		if (a < 0) {
 			printError(SDL_GetError(),"Sprite");
+			std::cout<< "w: " <<width<< " - h: " << height<< " - retorno: " << a << "\n" ;
 			return;
 		}
 		SetClip(0,0,width,height);
