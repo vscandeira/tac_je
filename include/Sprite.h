@@ -1,6 +1,7 @@
 #ifndef SPRITE_H_
 #define SPRITE_H_
 
+#include <iostream>
 #include <string>
 
 #define INCLUDE_SDL

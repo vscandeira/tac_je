@@ -1,8 +1,8 @@
 #include "State.h"
 
 State::State() {
-	bg = new Sprite("../assets/img/ocean.jpg");
-	music = new Music("../assets/audio/stageState.ogg");
+	bg = new Sprite("assets/img/ocean.jpg");
+	music = new Music("assets/audio/stageState.ogg");
 	//LoadAssets();
 	quitRequested = false;
 }

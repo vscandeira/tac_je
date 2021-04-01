@@ -18,13 +18,19 @@ void Sprite::Open(std::string file){
 	SDL_Renderer* renderer = Game::GetInstance().GetRenderer();
 	if (texture != nullptr) {
 		SDL_DestroyTexture(texture);
+		std::cout<<"textura diferente de null\n";
 	}
 	SDL_Texture* sdl = IMG_LoadTexture(renderer, file.c_str());
 	if ( sdl == nullptr) {
-		printError(SDL_GetError(),'S');
+		printError(SDL_GetError(),"Sprite");
 		return;
 	} else {
-		SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
+		int a = SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
+		if (a != 0) {
+			std::cout<< "w: " <<width<< " - h: " << height<< " - retorno: " << a << "\n" ;
+			printError(SDL_GetError(),"Sprite");
+			return;
+		}
 		SetClip(0,0,width,height);
 	}
 }
@@ -41,13 +47,13 @@ void Sprite::Render(int x, int y){
 
 	SDL_Renderer* renderer = Game::GetInstance().GetRenderer();
 
-	SDL_Rect dstClipRect;
-	dstClipRect.x = x;
-	dstClipRect.y = y;
-	dstClipRect.w = 1024;
-	dstClipRect.h = 600;
+	SDL_Rect dstRect;
+	dstRect.x = x;
+	dstRect.y = y;
+	dstRect.w = clipRect.w;
+	dstRect.h = clipRect.h;
 
-	SDL_RenderCopy(renderer, texture, &clipRect, &dstClipRect);
+	SDL_RenderCopy(renderer, texture, &clipRect, &dstRect);
 }
 int Sprite::GetWidth() const{
 	return width;

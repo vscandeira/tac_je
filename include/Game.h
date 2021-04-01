@@ -13,7 +13,7 @@
 #include "Music.h"
 #include "State.h"
 
-void printError(const char* erro, char debug);
+void printError(const char* erro, std::string debug);
 
 class Game {
 private:

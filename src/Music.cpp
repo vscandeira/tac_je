@@ -8,6 +8,7 @@ Music::Music() {
 Music::Music(std::string file){
 	music = nullptr;
 	Open(file);
+	Play();
 }
 
 Music::~Music() {
@@ -36,8 +37,9 @@ void Music::Stop(int msToStop/*=1500*/){
 	Mix_FadeOutMusic(msToStop);
 }
 void Music::Open(std::string file){
-	if(Mix_LoadMUS(file.c_str())!=0){
-		printError(SDL_GetError(),'M');
+	music = Mix_LoadMUS(file.c_str());
+	if(music==nullptr){
+		printError(SDL_GetError(),"Music");
 		return;
 	}
 }
