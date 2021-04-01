@@ -3,8 +3,11 @@
 
 #include <string>
 
-#include "SDL.h"
-#include "SDL_mixer.h"
+#define INCLUDE_SDL
+#define INCLUDE_SDL
+#define INCLUDE_SDL_IMAGE
+#define INCLUDE_SDL_MIXER
+#include "SDL_include.h"
 
 //#include "Game.h"
 

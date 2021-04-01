@@ -25,8 +25,11 @@ DEP_PATH = dep
 CPP_FILES = $(wildcard $(SRC_PATH)/*.cpp)
 INC_FILES = $(wildcard $(INC_PATH)/*.h)
 FILE_NAMES = $(sort $(notdir $(CPP_FILES:.cpp=)) $(notdir $(INC_FILES:.h=)) )
-DEP_FILES = $(addprefix $(DEP_PATH)/,$(addsufix .d,$(FILE_NAMES)))
-OBJ_FILES = $(addprefix $(BIN_PATH)/,$(notdir $(CPP_FILES:.cpp=.0)))
+DEP_FILES = $(addprefix $(DEP_PATH)/,$(addsuffix .d,$(FILE_NAMES)))
+OBJ_FILES = $(addprefix $(BIN_PATH)/,$(notdir $(CPP_FILES:.cpp=.o)))
+
+folders:
+	@mkdir -p $(DEP_PATH) $(BIN_PATH) $(INC_PATH) $(SRC_PATH)
 
 #Arquivo
 EXEC=JOGO
@@ -36,13 +39,22 @@ all: $(EXEC)
 
 #Gera o executável:
 $(EXEC): $(OBJ_FILES)
-	$(COMPILER) -o $@ $^ $(LINK_PATH) $(LIBS) $(FLAGS) 
-#Gera os arquivos objetos
-$(BIN_PATH)/%.o: $(DEP_PATHS)/%.d | folders 
+	$(COMPILER) -o $@ $^ $(LINK_PATH) $(LIBS) $(FLAGS)
+
+# Gera os arquivos objetos
+$(BIN_PATH)/%.o: $(DEP_PATH)/%.d | folders
 	$(COMPILER) $(INC_PATHS) $(addprefix $(SRC_PATH)/,$(notdir $(<:.d=.cpp))) -c $(FLAGS) -o $@
-#Gera os arquivos de dependência
+
+# Gera os arquivos de dependencia
 $(DEP_PATH)/%.d: $(SRC_PATH)/%.cpp | folders
 	$(COMPILER) $(INC_PATHS) $< $(DEP_FLAGS) $(FLAGS)
+
+#$(EXEC): $(OBJ_FILES)
+#	$(COMPILER) -o $@ $^ $(LINK_PATH) $(LIBS)
+
+#$(BIN_PATH)/%.o: $(SRC_PATH)/%.cpp
+#	@mkdir -p $(DEP_PATH) $(BIN_PATH)
+#	$(COMPILER) $(DEP_FLAGS) -c -o $@ $< $(INC_PATH) $(FLAGS) -include $(DEP_FILES)
 
 .SECONDEXPANSION:
 	.include $$(DEP_FILES)

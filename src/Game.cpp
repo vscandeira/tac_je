@@ -1,16 +1,6 @@
-#include <iostream>
-#include <string>
-
-#include "SDL.h"
-#include "SDL_image.h"
-#include "SDL_mixer.h"
-
 #include "Game.h"
-#include "Sprite.h"
-#include "Music.h"
-#include "State.h"
 
-Game* Game::instance;
+Game* Game::instance=nullptr;
 
 void printError(const char* erro, char debug) {
 	std::cout << "Erro apresentado: " << debug << " - mensagem: " << erro <<std::endl;

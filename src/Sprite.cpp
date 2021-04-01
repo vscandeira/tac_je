@@ -1,10 +1,5 @@
-#include <string>
-#include "SDL.h"
-#include "SDL_image.h"
-
 #include "Sprite.h"
 #include "Game.h"
-
 
 Sprite::Sprite() {
 	texture = nullptr;

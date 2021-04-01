@@ -1,8 +1,4 @@
-#include <iostream>
-
 #include "State.h"
-#include "Sprite.h"
-#include "Music.h"
 
 State::State() {
 	bg = new Sprite("../assets/img/ocean.jpg");

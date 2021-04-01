@@ -1,8 +1,3 @@
-#include <string>
-
-#include "SDL.h"
-#include "SDL_mixer.h"
-
 #include "Music.h"
 #include "Game.h"
 
