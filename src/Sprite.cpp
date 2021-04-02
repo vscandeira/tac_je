@@ -54,7 +54,7 @@ void Sprite::Render(int x, int y){
 
 	int a = SDL_RenderCopy(renderer, texture, &clipRect, &dstRect);
 	if (a != 0) {
-		printError(SDL_GetError(),"Sprite SDL_RenderCopy");
+		//printError(SDL_GetError(),"Sprite SDL_RenderCopy");
 		return;
 	}
 }
