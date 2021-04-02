@@ -52,7 +52,11 @@ void Sprite::Render(int x, int y){
 	dstRect.w = clipRect.w;
 	dstRect.h = clipRect.h;
 
-	SDL_RenderCopy(renderer, texture, &clipRect, &dstRect);
+	int a = SDL_RenderCopy(renderer, texture, &clipRect, &dstRect);
+	if (a != 0) {
+		printError(SDL_GetError(),"Sprite SDL_RenderCopy");
+		return;
+	}
 }
 int Sprite::GetWidth() const{
 	return width;
