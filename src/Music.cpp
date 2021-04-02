@@ -32,7 +32,7 @@ void Music::Play(int times/*=-1*/){
 	} else if (times == -1) {
 		int a = Mix_PlayMusic(music, -1);
 		if (a < 0) {
-			printError(SDL_GetError(),"Music");
+			printError(SDL_GetError(),"Music Mix_PlayMusic");
 		}
 	}
 }
@@ -42,7 +42,7 @@ void Music::Stop(int msToStop/*=1500*/){
 void Music::Open(std::string file){
 	music = Mix_LoadMUS(file.c_str());
 	if(music==nullptr){
-		printError(SDL_GetError(),"Music");
+		printError(SDL_GetError(),"Music Mix_LoadMUS");
 		return;
 	}
 }

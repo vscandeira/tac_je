@@ -21,12 +21,12 @@ void Sprite::Open(std::string file){
 	}
 	SDL_Texture* sdl = IMG_LoadTexture(renderer, file.c_str());
 	if ( sdl == nullptr) {
-		printError(SDL_GetError(),"Sprite");
+		printError(SDL_GetError(),"Sprite IMG_LoadTexture");
 		return;
 	} else {
 		int a = SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
 		if (a < 0) {
-			printError(SDL_GetError(),"Sprite");
+			printError(SDL_GetError(),"Sprite SDL_QueryTexture");
 			std::cout<< "w: " <<width<< " - h: " << height<< " - retorno: " << a << "\n" ;
 			return;
 		}

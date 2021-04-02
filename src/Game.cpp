@@ -9,27 +9,27 @@ void printError(const char* erro, std::string debug) {
 Game::Game(std::string title/*="Victor Santos Candeira - 17/0157636"*/, int width/*=1024*/,int height/*=600*/) {
 	instance = this;
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) != 0) {
-		printError(SDL_GetError(),"Game");
+		printError(SDL_GetError(),"Game SDL_Init");
 		return;
 	} else {
 		if (IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG | IMG_INIT_TIF) == 0) {
-			printError(SDL_GetError(),"Game");
+			printError(SDL_GetError(),"Game IMG_Init");
 			return;
 		} else {
 			int Mix_Init();
 			if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024)  != 0) {
-				printError(SDL_GetError(),"Game");
+				printError(SDL_GetError(),"Game Mix_OpenAudio");
 				return;
 			}
 			Mix_AllocateChannels(32); //default 8
 			window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
 			if (window == nullptr) {
-				printError(SDL_GetError(),"Game");
+				printError(SDL_GetError(),"Game SDL_CreateWindow");
 				return;
 			} else {
 				renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 				if (renderer == nullptr) {
-					printError(SDL_GetError(),"Game");
+					printError(SDL_GetError(),"Game SDL_CreateRenderer");
 					return;
 				} else {
 					state = new State();
