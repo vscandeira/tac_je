@@ -29,11 +29,9 @@ bool Music::IsOpen() const{
 void Music::Play(int times/*=-1*/){
 	if (IsOpen()) {
 		Stop();
-	} else if (times == -1) {
-		int a = Mix_PlayMusic(music, -1);
-		if (a < 0) {
-			printError(SDL_GetError(),"Music Mix_PlayMusic");
-		}
+	}
+	if (Mix_PlayMusic(music, times) < 0) {
+		printError(SDL_GetError(),"Music Mix_PlayMusic");
 	}
 }
 void Music::Stop(int msToStop/*=1500*/){
