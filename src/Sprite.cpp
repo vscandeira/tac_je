@@ -37,10 +37,6 @@ void Sprite::SetClip(int x, int y, int w, int h){
 	clipRect.h = h;
 }
 void Sprite::Render(int x, int y){
-	if (texture != nullptr) {
-		SDL_DestroyTexture(texture);
-	}
-
 	SDL_Renderer* renderer = Game::GetInstance().GetRenderer();
 
 	SDL_Rect dstRect;
@@ -49,11 +45,13 @@ void Sprite::Render(int x, int y){
 	dstRect.w = clipRect.w;
 	dstRect.h = clipRect.h;
 
-	if (SDL_RenderCopy(renderer, texture, &clipRect, &dstRect) != 0) {
+	int a = SDL_RenderCopy(renderer, texture, &clipRect, &dstRect);
+	if ( a != 0) {
 		printError(SDL_GetError(),"Sprite SDL_RenderCopy");
-		std::cout<<"W: "<<width<<" - H: "<<height<<std::endl;
+		std::cout<<a<<std::endl;
 		return;
 	}
+	SDL_RenderPresent(renderer);
 }
 int Sprite::GetWidth() const{
 	return width;
