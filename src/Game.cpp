@@ -17,8 +17,7 @@ Game::Game(std::string title/*="Victor Santos Candeira - 17/0157636"*/, int widt
 		return;
 	}
 	int flags=MIX_INIT_OGG|MIX_INIT_MOD;
-	int a = Mix_Init(flags);
-	if ((a&flags) != flags) {
+	if ((Mix_Init(flags)&flags) != flags) {
 		printError(Mix_GetError(), "Game Mix_Init");
 	}
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024)  != 0) {

@@ -19,19 +19,16 @@ void Sprite::Open(std::string file){
 	if (texture != nullptr) {
 		SDL_DestroyTexture(texture);
 	}
-	SDL_Texture* sdl = IMG_LoadTexture(renderer, file.c_str());
-	if ( sdl == nullptr) {
+	texture = IMG_LoadTexture(renderer, file.c_str());
+	if ( texture == nullptr) {
 		printError(SDL_GetError(),"Sprite IMG_LoadTexture");
 		return;
-	} else {
-		int a = SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
-		if (a < 0) {
-			printError(SDL_GetError(),"Sprite SDL_QueryTexture");
-			std::cout<< "w: " <<width<< " - h: " << height<< " - retorno: " << a << "\n" ;
-			return;
-		}
-		SetClip(0,0,width,height);
 	}
+	if (SDL_QueryTexture(texture, nullptr, nullptr, &width, &height) < 0) {
+		printError(SDL_GetError(),"Sprite SDL_QueryTexture");
+		return;
+	}
+	SetClip(0,0,width,height);
 }
 void Sprite::SetClip(int x, int y, int w, int h){
 	clipRect.x = x;
@@ -52,9 +49,9 @@ void Sprite::Render(int x, int y){
 	dstRect.w = clipRect.w;
 	dstRect.h = clipRect.h;
 
-	int a = SDL_RenderCopy(renderer, texture, &clipRect, &dstRect);
-	if (a != 0) {
-		//printError(SDL_GetError(),"Sprite SDL_RenderCopy");
+	if (SDL_RenderCopy(renderer, texture, &clipRect, &dstRect) != 0) {
+		printError(SDL_GetError(),"Sprite SDL_RenderCopy");
+		std::cout<<"W: "<<width<<" - H: "<<height<<std::endl;
 		return;
 	}
 }

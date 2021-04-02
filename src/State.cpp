@@ -8,7 +8,6 @@ State::State() {
 }
 
 State::~State() {
-	// TODO Auto-generated destructor stub
 	delete bg;
 	delete music;
 	delete &quitRequested;
