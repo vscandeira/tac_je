@@ -38,6 +38,9 @@ void Music::Stop(int msToStop/*=1500*/){
 	Mix_FadeOutMusic(msToStop);
 }
 void Music::Open(std::string file){
+	if (IsOpen()) {
+		Stop();
+	}
 	music = Mix_LoadMUS(file.c_str());
 	if(music==nullptr){
 		printError(SDL_GetError(),"Music Mix_LoadMUS");

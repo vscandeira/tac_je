@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+#include <unique_ptr>
 
 #define INCLUDE_SDL
 #define cndaINCLUDE_SDL_IMAGE
@@ -11,6 +13,7 @@
 
 #include "Music.h"
 #include "Sprite.h"
+#include "GameObject.h"
 
 //class Music;
 //class Sprite;
@@ -20,6 +23,10 @@ private:
 	Sprite* bg;
 	Music* music;
 	bool quitRequested;
+	std::vector<std::unique_ptr<GameObject>> objectArray;
+
+	void Input();
+	void AddObject(int mouseX, int mouseY);
 public:
 	State();
 	~State();

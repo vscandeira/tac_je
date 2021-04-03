@@ -1,11 +1,16 @@
 #include "Sprite.h"
 #include "Game.h"
+#include "GameObject.h"
 
-Sprite::Sprite() {
+Sprite::Sprite(GameObject& associated) : Component(GameObject& associated) {
 	texture = nullptr;
+	width = 0;
+	height = 0;
 }
 Sprite::Sprite(std::string file){
 	texture = nullptr;
+	width = 0;
+	height = 0;
 	Open(file);
 }
 Sprite::~Sprite() {
@@ -36,19 +41,17 @@ void Sprite::SetClip(int x, int y, int w, int h){
 	clipRect.w = w;
 	clipRect.h = h;
 }
-void Sprite::Render(int x, int y){
+void Sprite::Render(){
 	SDL_Renderer* renderer = Game::GetInstance().GetRenderer();
 
 	SDL_Rect dstRect;
-	dstRect.x = x;
-	dstRect.y = y;
+	dstRect.x = 0;
+	dstRect.y = 0;
 	dstRect.w = clipRect.w;
 	dstRect.h = clipRect.h;
 
-	int a = SDL_RenderCopy(renderer, texture, &clipRect, &dstRect);
-	if ( a != 0) {
+	if ( SDL_RenderCopy(renderer, texture, &clipRect, &dstRect); != 0) {
 		printError(SDL_GetError(),"Sprite SDL_RenderCopy");
-		std::cout<<a<<std::endl;
 		return;
 	}
 	SDL_RenderPresent(renderer);
@@ -65,4 +68,12 @@ bool Sprite::IsOpen() const{
 		flag = true;
 	}
 	return flag;
+}
+
+bool Component::Is(std::string type){
+	return false;
+}
+
+void Component::Update(float dt){
+	return;
 }

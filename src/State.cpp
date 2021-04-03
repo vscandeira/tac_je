@@ -26,5 +26,5 @@ void State::Update(float dt){
 	}
 }
 void State::Render(){
-	bg->Render(0,0);
+	bg->Render();
 }
