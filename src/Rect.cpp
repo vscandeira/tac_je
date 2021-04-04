@@ -7,12 +7,14 @@
 
 #include "Rect.h"
 
-Rect::Rect() {
-	// TODO Auto-generated constructor stub
-
+Rect::Rect(float x, float y, float w, float h) {
+	this->x = x;
+	this->y = y;
+	this->w = w;
+	this->h = h;
 }
 
 Rect::~Rect() {
-	// TODO Auto-generated destructor stub
+	delete x, y, w, h;
 }
 

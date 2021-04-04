@@ -4,7 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <unique_ptr>
+#include <memory>
+#include <fstream>
 
 #define INCLUDE_SDL
 #define cndaINCLUDE_SDL_IMAGE
@@ -13,7 +14,10 @@
 
 #include "Music.h"
 #include "Sprite.h"
+#include "Sound.h"
 #include "GameObject.h"
+#include "Vec2.h"
+#include "Face.h"
 
 //class Music;
 //class Sprite;
@@ -23,7 +27,7 @@ private:
 	Sprite* bg;
 	Music* music;
 	bool quitRequested;
-	std::vector<std::unique_ptr<GameObject>> objectArray;
+	std::vector<std::unique_ptr<GameObject>> objectArray; // @suppress("Invalid template argument")
 
 	void Input();
 	void AddObject(int mouseX, int mouseY);

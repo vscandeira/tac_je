@@ -31,17 +31,15 @@
 #include <iostream>
 #include <string>
 
-#define INCLUDE_SDL
-#define INCLUDE_SDL_IMAGE
-#define INCLUDE_SDL_MIXER
-#include "SDL_include.h"
-
 class Rect {
+private:
+	float x;
+	float y;
+	float w;
+	float h;
 public:
-	int x;
-	int y;
-	Rect();
-	virtual ~Rect();
+	Rect(float x, float y, float w, float h);
+	~Rect();
 };
 
 #endif /* RECT_H_ */

@@ -19,7 +19,7 @@ private:
 	SDL_Rect clipRect;
 public:
 	Sprite(GameObject& associated);
-	Sprite(std::string file);
+	Sprite(GameObject& associated,std::string file);
 	~Sprite();
 	void Open(std::string file);
 	void SetClip(int x, int y, int w, int h);

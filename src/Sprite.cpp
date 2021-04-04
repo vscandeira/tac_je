@@ -7,7 +7,7 @@ Sprite::Sprite(GameObject& associated) : Component(GameObject& associated) {
 	width = 0;
 	height = 0;
 }
-Sprite::Sprite(std::string file){
+Sprite::Sprite(GameObject& associated, std::string file){
 	texture = nullptr;
 	width = 0;
 	height = 0;
