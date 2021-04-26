@@ -2,7 +2,7 @@
  * Component.h
  *
  *  Created on: 2 de abr de 2021
- *      Author: vitim
+ *      Author: Victor Santos Candeira
  */
 
 #ifndef COMPONENT_H_
@@ -17,10 +17,12 @@
 #include "SDL_include.h"
 #include "GameObject.h"
 
-class Component {
-public:
-	static GameObject& associated;
+class GameObject;		// foward declaration para evitar problemas em tempo de compilação
 
+class Component {
+protected:
+	GameObject& associated;
+public:
 	Component(GameObject& associated);
 	virtual ~Component();
 	virtual void Update(float dt)=0;

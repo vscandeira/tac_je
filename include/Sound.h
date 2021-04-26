@@ -2,7 +2,7 @@
  * Sound.h
  *
  *  Created on: 2 de abr de 2021
- *      Author: vitim
+ *      Author: Victor Santos Candeira
  */
 
 #ifndef SOUND_H_
@@ -16,6 +16,8 @@
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
 #include "Component.h"
+#include "GameObject.h"
+
 
 class Sound : public Component {
 private:
@@ -25,10 +27,10 @@ public:
 	Sound(GameObject& associated);
 	Sound(GameObject& associated, std::string file);
 	~Sound();
-	void Play(int times = 1);
-	void Stop();
-	void Open(std::string file);
 	bool IsOpen();
+	void Stop();
+	void Play(int times = 1);
+	void Open(std::string file);
 
 	void Update(float dt);
 	void Render();

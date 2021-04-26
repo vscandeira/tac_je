@@ -13,6 +13,8 @@
 #include "Component.h"
 #include "Rect.h"
 
+class Component;		// foward declaration para evitar problemas em tempo de compilação
+
 class GameObject {
 private:
 	std::vector<Component*> components;

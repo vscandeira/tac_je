@@ -2,7 +2,7 @@
  * Face.h
  *
  *  Created on: 3 de abr de 2021
- *      Author: vitim
+ *      Author: Victor Santos Candeira
  */
 
 #ifndef FACE_H_
@@ -16,6 +16,7 @@
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
 #include "Component.h"
+#include "Sound.h"
 
 class Face : public Component {
 private:

@@ -9,6 +9,7 @@
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
 #include "Component.h"
+#include "GameObject.h"
 
 
 class Sprite : public Component {
@@ -23,7 +24,9 @@ public:
 	~Sprite();
 	void Open(std::string file);
 	void SetClip(int x, int y, int w, int h);
+	void Update(float dt);
 	void Render();
+	bool Is(std::string type);
 	int GetWidth() const;
 	int GetHeight() const;
 	bool IsOpen() const;

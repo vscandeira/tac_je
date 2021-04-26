@@ -28,18 +28,18 @@
 #ifndef RECT_H_
 #define RECT_H_
 
-#include <iostream>
-#include <string>
+#include <array>
 
 class Rect {
-private:
+public:
 	float x;
 	float y;
 	float w;
 	float h;
-public:
+	Rect();
 	Rect(float x, float y, float w, float h);
 	~Rect();
+	bool Contains( std::array<float, 2> arr );
 };
 
 #endif /* RECT_H_ */

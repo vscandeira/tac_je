@@ -3,14 +3,16 @@
 
 #include <iostream>
 #include <string>
+#include <ctime>
+#include <cstdlib>
 
 #define INCLUDE_SDL
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
 
-#include "Sprite.h"
-#include "Music.h"
+//#include "Sprite.h"
+//#include "Music.h"
 #include "State.h"
 
 void printError(const char* erro, std::string debug);

@@ -8,6 +8,7 @@ void printError(const char* erro, std::string debug) {
 
 Game::Game(std::string title/*="Victor Santos Candeira - 17/0157636"*/, int width/*=1024*/,int height/*=600*/) {
 	instance = this;
+	srand(time(NULL));
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_TIMER) != 0) {
 		printError(SDL_GetError(),"Game SDL_Init");
 		return;

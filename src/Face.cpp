@@ -2,35 +2,38 @@
  * Face.cpp
  *
  *  Created on: 3 de abr de 2021
- *      Author: vitim
+ *      Author: Victor Santos Candeira
  */
 
 #include "Face.h"
 
-Face::Face(GameObject& associated) {
+Face::Face(GameObject& associated): Component(associated) {
 	//construir mãe
 	hitpoints = 30;
 
 }
 
 Face::~Face() {
-	delete hitpoints;
+	delete &hitpoints;
 }
 
-void Damage(int damage){
+void Face::Damage(int damage){
 	hitpoints -= damage;
 	if (hitpoints <= 0) {
-		associated.GetComponente()->Play();
+		std::string f = "Sound";
+		if (associated.GetComponent(f) != nullptr) {
+			//associated.GetComponent(f)->Play();
+		}
 		associated.RequestDelete();
 	}
 }
-void Update(float dt){
+void Face::Update(float dt){
 	return;
 }
-void Render(){
+void Face::Render(){
 	return;
 }
-bool Is(std::string type){
+bool Face::Is(std::string type){
 	bool flag = false;
 	if (type.compare("Face")==0) {
 		flag = true;

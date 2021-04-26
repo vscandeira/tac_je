@@ -2,10 +2,12 @@
 
 State::State() {
 	GameObject* go = new GameObject();
-	bg = new Sprite(go, "assets/img/ocean.jpg");
+	std::string s = "assets/img/ocean.jpg";
+	bg = new Sprite(*go, s);
 	go->AddComponent(bg);
-	music = new Music("assets/audio/stageState.ogg");
-
+	std::string m = "assets/audio/stageState.ogg";
+	music = new Music(m);
+	objectArray.emplace_back(go);
 	quitRequested = false;
 }
 
@@ -17,6 +19,7 @@ State::~State() {
 }
 
 void State::Input(){
+	double PI = M_PI;
 	SDL_Event event;
 	int mouseX, mouseY;
 
@@ -70,13 +73,18 @@ void State::Input(){
 	}
 }
 void State::AddObject(int mouseX, int mouseY){
+	double PI = M_PI;
+	Vec2 rot = Vec2( mouseX, mouseY ).GetRotated( -PI + PI*(rand() % 1001)/500.0 );
 	GameObject* go = new GameObject();
-	Sprite* spr = new Sprite(go, "assets/img/penguinface.png");
+	std::string sp = "assets/img/penguinface.png";
+	Sprite* spr = new Sprite(*go, sp);
 	go->AddComponent(spr);
-	go->box(mouseX, mouseY,(float) obj->GetWidth(), (float) obj->GetHeight());
-	Sound* sd = new Sound(go, "assets/audio/boom.wav");
-	go->AddComponent(sd);
-	Face* fc = new Face(go);
+	Rect *r = new Rect( (float) mouseX/*-(spr->GetWidth()/2)*/, (float) mouseY/*-(spr->GetHeight()/2)*/, (float) spr->GetWidth(), (float) spr->GetHeight() );
+	go->box = *r;
+	std::string sd = "assets/audio/boom.wav";
+	Sound* snd = new Sound(*go, sd);
+	go->AddComponent(snd);
+	Face* fc = new Face(*go);
 	go->AddComponent(fc);
 	objectArray.emplace_back(go);
 }
@@ -101,9 +109,11 @@ void State::Update(float dt){
 			objectArray.erase(objectArray.begin()+i);
 		}
 	}
+/*
 	if (SDL_QuitRequested()) {
 		quitRequested = true;
 	}
+*/
 }
 void State::Render(){
 	int len = objectArray.size();

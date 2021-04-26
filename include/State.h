@@ -5,18 +5,20 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include <fstream>
+#include <cmath>
 
 #define INCLUDE_SDL
 #define cndaINCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
 
+#include "Component.h"
+#include "GameObject.h"
 #include "Music.h"
 #include "Sprite.h"
 #include "Sound.h"
-#include "GameObject.h"
 #include "Vec2.h"
+#include "Rect.h"
 #include "Face.h"
 
 //class Music;
