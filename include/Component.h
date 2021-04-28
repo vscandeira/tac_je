@@ -17,7 +17,7 @@
 #include "SDL_include.h"
 #include "GameObject.h"
 
-class GameObject;		// foward declaration para evitar problemas em tempo de compilação
+//class GameObject;		// foward declaration para evitar problemas em tempo de compilação
 
 class Component {
 protected:

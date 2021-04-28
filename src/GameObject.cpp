@@ -1,5 +1,8 @@
 
 #include "GameObject.h"
+#include "Face.h"
+#include "Sound.h"
+#include "Sprite.h"
 
 GameObject::GameObject() {
 	isDead = false;
@@ -48,11 +51,24 @@ void GameObject::RemoveComponent(Component* cpt){
 	}
 }
 Component* GameObject::GetComponent(std::string type){
+//std::unique_ptr<Component> GameObject::GetComponent(std::string type){
 	Component* retorno = nullptr;
 	int len = components.size();
 	for (int i = 0; i<len; i++) {
 		if (components[i]->Is(type)){
-			retorno = components[i];
+			if (type.compare("Face")==0) {
+				retorno = components[i];
+				//return (Face) components[i];
+				//retorno = std::make_unique<Face>(components[i]);
+			} else if (type.compare("Sound")==0) {
+				retorno = components[i];
+				//retorno = std::make_unique<Sound>(components[i]);
+				//return (Sound) components[i];
+			} else if (type.compare("Sprite")==0) {
+				retorno = components[i];
+				//retorno = std::make_unique<Sprite>(components[i]);
+				//return (Sprite) components[i];
+			}
 			break;
 		}
 	}

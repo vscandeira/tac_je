@@ -67,7 +67,11 @@ void Sprite::Render(){
 }
 
 bool Sprite::Is(std::string type){
-	return false;
+	bool flag = false;
+	if (type.compare("Sprite")==0) {
+		flag = true;
+	}
+	return flag;
 }
 
 int Sprite::GetWidth() const{
