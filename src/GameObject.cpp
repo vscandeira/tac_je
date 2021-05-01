@@ -35,7 +35,7 @@ void GameObject::RequestDelete(){
 	isDead = true;
 }
 void GameObject::AddComponent(Component* cpt){
-	components[components.size()] = cpt;
+	components.emplace_back(cpt);
 }
 void GameObject::RemoveComponent(Component* cpt){
 	int len = components.size();

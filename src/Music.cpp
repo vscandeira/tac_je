@@ -47,3 +47,4 @@ void Music::Open(std::string file){
 		return;
 	}
 }
+

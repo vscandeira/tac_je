@@ -4,10 +4,11 @@ State::State() {
 	GameObject* go = new GameObject();
 	std::string s = "assets/img/ocean.jpg";
 	bg = new Sprite(*go, s);
+	bg->Render();
 	go->AddComponent(bg);
+	objectArray.emplace_back(go);
 	std::string m = "assets/audio/stageState.ogg";
 	music = new Music(m);
-	objectArray.emplace_back(go);
 	quitRequested = false;
 }
 
@@ -22,10 +23,15 @@ void State::Input(){
 	double PI = M_PI;
 	SDL_Event event;
 	int mouseX, mouseY;
+	std::cout << "Teste state input 1" <<std::endl;
 
 	// Obtenha as coordenadas do mouse
+	SDL_PumpEvents();
 	SDL_GetMouseState(&mouseX, &mouseY);
+	std::cout << "Teste state input 2" <<std::endl;
 	AddObject(mouseX+200, mouseY+200);
+
+	std::cout << "Teste state input 3" <<std::endl;
 
 	// SDL_PollEvent retorna 1 se encontrar eventos, zero caso contrário
 	while (SDL_PollEvent(&event)) {
@@ -66,7 +72,7 @@ void State::Input(){
 			}
 			// Se não, crie um objeto
 			else {
-				Vec2 objPos = Vec2( 200, 0 ).GetRotated( -PI + PI*(rand() % 1001)/500.0 ) + Vec2( mouseX, mouseY );
+				Vec2 objPos = Vec2( 200, 0 ).GetRotated( (double) -PI + PI*(rand() % 1001)/500.0 ) + Vec2( mouseX, mouseY );
 				AddObject((int)objPos.x, (int)objPos.y);
 			}
 		}
@@ -74,7 +80,10 @@ void State::Input(){
 }
 void State::AddObject(int mouseX, int mouseY){
 	double PI = M_PI;
-	Vec2 rot = Vec2( mouseX, mouseY ).GetRotated( -PI + PI*(rand() % 1001)/500.0 );
+	Vec2 prov = Vec2( mouseX, mouseY );
+	double ang = (double) -PI + PI*(rand() % 1001)/500.0;
+	Vec2 rot = prov.GetRotated(ang);
+	// delete &prov;
 	GameObject* go = new GameObject();
 	std::string sp = "assets/img/penguinface.png";
 	Sprite* spr = new Sprite(*go, sp);
@@ -87,6 +96,7 @@ void State::AddObject(int mouseX, int mouseY){
 	Face* fc = new Face(*go);
 	go->AddComponent(fc);
 	objectArray.emplace_back(go);
+	std::cout << "Teste state AddObject final" <<std::endl;
 }
 
 bool State::QuitRequested() const{
@@ -98,6 +108,7 @@ void State::LoadAssets(){
 }
 void State::Update(float dt){
 	Input();
+	std::cout << "Teste state Update 1" <<std::endl;
 	int len = objectArray.size();
 	for (int i=0; i<len; i++) {
 		GameObject* go = (GameObject*) objectArray[i].get();
