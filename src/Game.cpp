@@ -66,7 +66,6 @@ void Game::Run(){
 		state->Update(x);
 		state->Render();
 		SDL_Delay(33);
-		std::cout << "Teste game" <<std::endl;
 	}
 }
 SDL_Renderer* Game::GetRenderer() const{

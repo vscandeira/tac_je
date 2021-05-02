@@ -22,13 +22,16 @@ Rect::Rect(float x, float y, float w, float h) {
 }
 
 Rect::~Rect() {
-	delete &x, &y, &w, &h;
+	delete &x;
+	delete &y;
+	delete &w;
+	delete &h;
 }
 
 bool Rect::Contains( std::array<float, 2> arr ){
 	bool retorno = false;
 	if (this->x == arr[0]) {
-		if (this->y = arr[1]) {
+		if (this->y == arr[1]) {
 			retorno = true;
 		}
 	}

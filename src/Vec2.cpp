@@ -23,7 +23,6 @@ Vec2 Vec2::GetRotated( double ang ){
 	sin_ang = sin(ang);
 	cos_ang = cos(ang);
 	Vec2 vec = Vec2( (float) cos_ang*x + sin_ang*y, (float) cos_ang*y - sin_ang*x);
-	std::cout << "Teste Vec2 3 - vec1x: " << this->x << " - vec1y: " << this->y << " - vec2x: " << vec.x << " - vec2y: " << vec.y << std::endl;
 	return vec;
 }
 

@@ -23,15 +23,13 @@ void State::Input(){
 	double PI = M_PI;
 	SDL_Event event;
 	int mouseX, mouseY;
-	std::cout << "Teste state input 1" <<std::endl;
 
 	// Obtenha as coordenadas do mouse
-	SDL_PumpEvents();
+	//SDL_PumpEvents();
 	SDL_GetMouseState(&mouseX, &mouseY);
-	std::cout << "Teste state input 2" <<std::endl;
+	std::cout<<"print state input 1: "<< mouseX << " - " << mouseY <<std::endl;
 	AddObject(mouseX+200, mouseY+200);
-
-	std::cout << "Teste state input 3" <<std::endl;
+	std::cout<<"print state input 2"<<std::endl;
 
 	// SDL_PollEvent retorna 1 se encontrar eventos, zero caso contrário
 	while (SDL_PollEvent(&event)) {
@@ -83,7 +81,6 @@ void State::AddObject(int mouseX, int mouseY){
 	Vec2 prov = Vec2( mouseX, mouseY );
 	double ang = (double) -PI + PI*(rand() % 1001)/500.0;
 	Vec2 rot = prov.GetRotated(ang);
-	// delete &prov;
 	GameObject* go = new GameObject();
 	std::string sp = "assets/img/penguinface.png";
 	Sprite* spr = new Sprite(*go, sp);
@@ -96,7 +93,11 @@ void State::AddObject(int mouseX, int mouseY){
 	Face* fc = new Face(*go);
 	go->AddComponent(fc);
 	objectArray.emplace_back(go);
-	std::cout << "Teste state AddObject final" <<std::endl;
+	std::cout<<"print state addobject final"<<std::endl;
+	std::cout<<go->IsDead()<<std::endl;
+	std::cout<<objectArray.size()<<std::endl;
+	return;
+	std::cout<<"print state addobject final2"<<std::endl;
 }
 
 bool State::QuitRequested() const{
@@ -108,7 +109,6 @@ void State::LoadAssets(){
 }
 void State::Update(float dt){
 	Input();
-	std::cout << "Teste state Update 1" <<std::endl;
 	int len = objectArray.size();
 	for (int i=0; i<len; i++) {
 		GameObject* go = (GameObject*) objectArray[i].get();
