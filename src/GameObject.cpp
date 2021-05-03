@@ -34,10 +34,10 @@ bool GameObject::IsDead(){
 void GameObject::RequestDelete(){
 	isDead = true;
 }
-void GameObject::AddComponent(Component* cpt){
+void GameObject::AddComponent(std::unique_ptr<Component> cpt){
 	components.emplace_back(cpt);
 }
-void GameObject::RemoveComponent(Component* cpt){
+void GameObject::RemoveComponent(std::unique_ptr<Component> cpt){
 	int len = components.size();
 	for (int i=0; i<len; i++) {
 		if(components[i] == cpt){
@@ -50,26 +50,23 @@ void GameObject::RemoveComponent(Component* cpt){
 		}
 	}
 }
-Component* GameObject::GetComponent(std::string type){
-//std::unique_ptr<Component> GameObject::GetComponent(std::string type){
-	Component* retorno = nullptr;
+
+std::unique_ptr<Component> GameObject::GetComponent(std::string type){
+	std::unique_ptr<Component> retorno = nullptr;
 	int len = components.size();
 	for (int i = 0; i<len; i++) {
 		if (components[i]->Is(type)){
-			if (type.compare("Face")==0) {
-				retorno = components[i];
-				//return (Face) components[i];
-				//retorno = std::make_unique<Face>(components[i]);
-			} else if (type.compare("Sound")==0) {
-				retorno = components[i];
-				//retorno = std::make_unique<Sound>(components[i]);
-				//return (Sound) components[i];
+			if (type.compare("Sound")==0) {
+				//retorno = components[i];
+				return std::make_unique<Sound>(components[i]);
+			} else if (type.compare("Face")==0) {
+				return std::make_unique<Face>(components[i]);
 			} else if (type.compare("Sprite")==0) {
-				retorno = components[i];
-				//retorno = std::make_unique<Sprite>(components[i]);
+				//retorno = components[i];
+				return std::make_unique<Sprite>(components[i]);
 				//return (Sprite) components[i];
 			}
-			break;
+			//break;
 		}
 	}
 	return retorno;

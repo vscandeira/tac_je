@@ -22,7 +22,7 @@ void Face::Damage(int damage){
 	if (hitpoints <= 0) {
 		std::string f = "Sound";
 		if (associated.GetComponent(f) != nullptr) {
-			Sound* sound = (Sound*)associated.GetComponent(f);
+			std::unique_ptr<Sound> sound = dynamic_cast<Sound> associated.GetComponent(f);
 			sound->Play();
 		}
 		associated.RequestDelete();

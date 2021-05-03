@@ -11,14 +11,13 @@
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
-//#include "Component.h"
 #include "Rect.h"
 
-class Component;		// foward declaration para evitar problemas em tempo de compilação
+class Component;
 
 class GameObject {
 private:
-	std::vector<Component*> components;
+	std::vector<std::unique_ptr<Component>> components;
 	bool isDead;
 public:
 	Rect box;
@@ -29,10 +28,9 @@ public:
 	void Render();
 	bool IsDead();
 	void RequestDelete();
-	void AddComponent(Component* cpt);
-	void RemoveComponent(Component* cpt);
-	Component* GetComponent(std::string type);
-//	std::unique_ptr<Component> GetComponent(std::string type);
+	void AddComponent(std::unique_ptr<Component> cpt);
+	void RemoveComponent(std::unique_ptr<Component> cpt);
+	std::unique_ptr<Component> GetComponent(std::string type);
 };
 
 #endif /* GAMEOBJECT_H_ */

@@ -10,13 +10,13 @@
 
 #include <iostream>
 #include <string>
+#include <memory>
 
 #define INCLUDE_SDL
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
 #include "Component.h"
-//#include "GameObject.h"
 #include "Sound.h"
 
 class GameObject;

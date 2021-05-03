@@ -1,11 +1,13 @@
 #include "State.h"
 
 State::State() {
-	GameObject* go = new GameObject();
+	std::unique_ptr<GameObject> go;
+	go.reset( new GameObject() );
 	std::string s = "assets/img/ocean.jpg";
-	bg = new Sprite(*go, s);
+	bg = new Sprite(dynamic_cast<GameObject*>(go), s);
+	std::unique_ptr<Sprite> bg_uni = std::make_unique<Sprite>(*bg);
 	bg->Render();
-	go->AddComponent(bg);
+	go->AddComponent(bg_uni);
 	objectArray.emplace_back(go);
 	std::string m = "assets/audio/stageState.ogg";
 	music = new Music(m);
@@ -53,7 +55,7 @@ void State::Input(){
 				// chamar funções de GameObjects, use objectArray[i]->função() direto.
 
 				if(go->box.Contains( {(float)mouseX, (float)mouseY} ) ) {
-					Face* face = (Face*)go->GetComponent( "Face" );
+					std::unique_ptr<Face> face = go->GetComponent( "Face" );
 					if ( nullptr != face ) {
 						// Aplica dano
 						face->Damage(std::rand() % 10 + 10);
@@ -81,18 +83,28 @@ void State::AddObject(int mouseX, int mouseY){
 	Vec2 prov = Vec2( mouseX, mouseY );
 	double ang = (double) -PI + PI*(rand() % 1001)/500.0;
 	Vec2 rot = prov.GetRotated(ang);
-	GameObject* go = new GameObject();
+
+	std::unique_ptr<GameObject> go;
+	go.reset(new GameObject());
+
 	std::string sp = "assets/img/penguinface.png";
-	Sprite* spr = new Sprite(*go, sp);
+	std::unique_ptr<Sprite> spr;
+	spr.reset(new Sprite(dynamic_cast<GameObject*>(go), sp));
 	go->AddComponent(spr);
+
 	Rect *r = new Rect( (float) mouseX/*-(spr->GetWidth()/2)*/, (float) mouseY/*-(spr->GetHeight()/2)*/, (float) spr->GetWidth(), (float) spr->GetHeight() );
 	go->box = *r;
+
 	std::string sd = "assets/audio/boom.wav";
-	Sound* snd = new Sound(*go, sd);
+	std::unique_ptr<Sound> snd;
+	snd.reset(new Sound(dynamic_cast<GameObject*>(go), sd));
 	go->AddComponent(snd);
-	Face* fc = new Face(*go);
+
+	std::unique_ptr<Face> fc;
+	fc.reset(new Face(dynamic_cast<GameObject*>(go)));
 	go->AddComponent(fc);
 	objectArray.emplace_back(go);
+
 	std::cout<<"print state addobject final"<<std::endl;
 	std::cout<<go->IsDead()<<std::endl;
 	std::cout<<objectArray.size()<<std::endl;
@@ -129,7 +141,7 @@ void State::Update(float dt){
 void State::Render(){
 	int len = objectArray.size();
 	for (int i=0; i<len; i++) {
-		GameObject* go = (GameObject*) objectArray[i].get();
+		std::unique_ptr<GameObject> go = objectArray[i].get();
 		go->Render();
 	}
 }
