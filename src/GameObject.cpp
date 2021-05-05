@@ -10,7 +10,7 @@ GameObject::GameObject() {
 
 GameObject::~GameObject() {
 	for (int i=components.size(); i>0; i--) {
-		delete components[i-1];
+		components.erase(components.begin() + i - 1);
 	}
 	components.clear();
 	delete &isDead;
@@ -41,11 +41,11 @@ void GameObject::RemoveComponent(std::unique_ptr<Component> cpt){
 	int len = components.size();
 	for (int i=0; i<len; i++) {
 		if(components[i] == cpt){
-			delete components[i];
+			components.erase(components.begin()+i);
 			for (int j = i+1; j<len; j++) {
 				components[j-1] = components[j];
 			}
-			delete components[len];
+			components.erase(components.begin()+len);
 			break;
 		}
 	}

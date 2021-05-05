@@ -17,9 +17,9 @@
 #include "Music.h"
 #include "Sprite.h"
 #include "Sound.h"
+#include "Face.h"
 #include "Vec2.h"
 #include "Rect.h"
-#include "Face.h"
 
 class State {
 private:

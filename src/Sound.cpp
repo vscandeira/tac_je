@@ -18,7 +18,7 @@ Sound::~Sound() {
 	if (chunk != nullptr) {
 		Mix_HaltChannel(channel);
 		Mix_FreeChunk(chunk);
-		delete &channel;
+		//delete &channel;
 	}
 }
 

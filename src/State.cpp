@@ -1,14 +1,15 @@
 #include "State.h"
 
 State::State() {
-	std::unique_ptr<GameObject> go;
-	go.reset( new GameObject() );
+	GameObject* go = new GameObject();
+	std::unique_ptr<GameObject> go_uni;
+	go_uni = std::make_unique<GameObject>(*go);
 	std::string s = "assets/img/ocean.jpg";
-	bg = new Sprite(dynamic_cast<GameObject*>(go), s);
-	std::unique_ptr<Sprite> bg_uni = std::make_unique<Sprite>(*bg);
+	bg = new Sprite(go, s);
 	bg->Render();
-	go->AddComponent(bg_uni);
-	objectArray.emplace_back(go);
+	//std::unique_ptr<Sprite> bg_uni = std::make_unique<Sprite>(*bg);
+	//go->AddComponent(bg_uni);
+	//objectArray.emplace_back(go);
 	std::string m = "assets/audio/stageState.ogg";
 	music = new Music(m);
 	quitRequested = false;
@@ -84,26 +85,27 @@ void State::AddObject(int mouseX, int mouseY){
 	double ang = (double) -PI + PI*(rand() % 1001)/500.0;
 	Vec2 rot = prov.GetRotated(ang);
 
-	std::unique_ptr<GameObject> go;
-	go.reset(new GameObject());
+	GameObject* go = new GameObject();
+	std::unique_ptr<GameObject> go_uni;
+	go_uni = std::make_unique<GameObject>(*go);
 
 	std::string sp = "assets/img/penguinface.png";
 	std::unique_ptr<Sprite> spr;
-	spr.reset(new Sprite(dynamic_cast<GameObject*>(go), sp));
-	go->AddComponent(spr);
+	spr.reset(new Sprite(go, sp));
+	go_uni->AddComponent(spr);
 
 	Rect *r = new Rect( (float) mouseX/*-(spr->GetWidth()/2)*/, (float) mouseY/*-(spr->GetHeight()/2)*/, (float) spr->GetWidth(), (float) spr->GetHeight() );
-	go->box = *r;
+	go_uni->box = *r;
 
 	std::string sd = "assets/audio/boom.wav";
 	std::unique_ptr<Sound> snd;
-	snd.reset(new Sound(dynamic_cast<GameObject*>(go), sd));
-	go->AddComponent(snd);
+	snd.reset(new Sound(go, sd));
+	go_uni->AddComponent(snd);
 
 	std::unique_ptr<Face> fc;
-	fc.reset(new Face(dynamic_cast<GameObject*>(go)));
-	go->AddComponent(fc);
-	objectArray.emplace_back(go);
+	fc.reset(new Face(go));
+	go_uni->AddComponent(fc);
+	objectArray.emplace_back(go_uni);
 
 	std::cout<<"print state addobject final"<<std::endl;
 	std::cout<<go->IsDead()<<std::endl;
