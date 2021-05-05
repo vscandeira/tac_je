@@ -89,13 +89,13 @@ void State::AddObject(int mouseX, int mouseY){
 	std::unique_ptr<GameObject> go_uni;
 	go_uni = std::make_unique<GameObject>(*go);
 
+	Rect* r = new Rect( (float) mouseX/*-(spr->GetWidth()/2)*/, (float) mouseY/*-(spr->GetHeight()/2)*/, (float) spr->GetWidth(), (float) spr->GetHeight() );
+	go_uni->box = *r;
+
 	std::string sp = "assets/img/penguinface.png";
 	std::unique_ptr<Sprite> spr;
 	spr.reset(new Sprite(go, sp));
 	go_uni->AddComponent(spr);
-
-	Rect *r = new Rect( (float) mouseX/*-(spr->GetWidth()/2)*/, (float) mouseY/*-(spr->GetHeight()/2)*/, (float) spr->GetWidth(), (float) spr->GetHeight() );
-	go_uni->box = *r;
 
 	std::string sd = "assets/audio/boom.wav";
 	std::unique_ptr<Sound> snd;
