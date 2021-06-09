@@ -15,7 +15,9 @@
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
-#include "GameObject.h"
+//#include "GameObject.h"
+
+class GameObject;
 
 class Component {
 protected:

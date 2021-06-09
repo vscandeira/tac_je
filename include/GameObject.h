@@ -12,8 +12,9 @@
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
 #include "Rect.h"
+#include "Component.h"
 
-class Component;
+//class Component;
 
 class GameObject {
 private:
@@ -31,6 +32,9 @@ public:
 	void AddComponent(std::unique_ptr<Component> cpt);
 	void RemoveComponent(std::unique_ptr<Component> cpt);
 	std::unique_ptr<Component> GetComponent(std::string type);
+
+	//GameObject(const GameObject&) = delete;
+	//GameObject(GameObject&&) = default;
 };
 
 #endif /* GAMEOBJECT_H_ */
