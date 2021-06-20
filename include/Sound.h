@@ -9,6 +9,7 @@
 #define SOUND_H_
 
 #include <iostream>
+#include <memory>
 #include <string>
 
 #define INCLUDE_SDL
