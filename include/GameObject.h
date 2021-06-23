@@ -65,9 +65,7 @@ public:
 	 ----------------------------Tentativas----------------------------------------------
 	 */
 	//GameObject(GameObject& go);
-	///*
 	//GameObject(GameObject&& go);
-	//*/
 };
 
 #endif /* GAMEOBJECT_H_ */

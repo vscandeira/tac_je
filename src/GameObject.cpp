@@ -73,13 +73,19 @@ std::unique_ptr<Component> GameObject::GetComponent(std::string type){
 }
 
 /*
+GameObject::GameObject( GameObject& go){
+	this->isDead = go.isDead;
+	this->components = go.components;
+}
+
+///*
 GameObject::GameObject(GameObject&& go) noexcept :
 		components(std::move(go.components)),       	// explicit move of a member of class type
 		isDead(std::exchange(go.isDead,0))				// explicit move of a member of non-class type
 { }
-*/
 
+///*
 GameObject::GameObject( GameObject& go) : components(go.components), isDead(go.isDead) {
 	//std::cout<<"Errado!\n";
 	}
-
+*/
