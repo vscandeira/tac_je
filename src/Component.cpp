@@ -5,6 +5,4 @@ Component::Component(GameObject& associated) : associated(associated) {
 
 }
 
-Component::~Component() {
-	//delete (&associated);
-}
+Component::~Component() {}

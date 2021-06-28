@@ -2,19 +2,11 @@
 #include "Game.h"
 
 Sound::Sound(GameObject& associated) : Component(associated) {
-	this->associated = associated;
-	//this->associated(associated);
-	//this->associated(std::const_pointer_cast<GameObject>(associated));
-	//this->associated = std::move(associated);
 	chunk = nullptr;
 	channel = 0;
 }
 
 Sound::Sound(GameObject& associated, std::string file) : Component(associated) {
-	this->associated = associated;
-	//this->associated(associated);
-
-	//this->associated = std::move(associated);
 	chunk = nullptr;
 	channel = 0;
 	Open(file);
@@ -24,7 +16,6 @@ Sound::~Sound() {
 	if (chunk != nullptr) {
 		Mix_HaltChannel(channel);
 		Mix_FreeChunk(chunk);
-		//delete &channel;
 	}
 }
 
