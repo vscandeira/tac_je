@@ -17,9 +17,8 @@
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
 #include "Component.h"
+#include "GameObject.h"
 #include "Sound.h"
-
-class GameObject;
 
 class Face : public Component {
 private:
