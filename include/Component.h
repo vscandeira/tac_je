@@ -15,8 +15,9 @@
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
+#include "GameObject.h"
 
-class GameObject;
+//class GameObject;
 
 class Component {
 protected:
@@ -28,6 +29,8 @@ public:
 	virtual void Update(float dt)=0;
 	virtual void Render()=0;
 	virtual bool Is(std::string type)=0;
+	Component(const Component&) = delete;
+	Component(Component&&) = default;
 };
 
 #endif /* COMPONENT_H_ */

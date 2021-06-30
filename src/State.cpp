@@ -1,11 +1,11 @@
 #include "State.h"
 
 State::State() {
-	std::unique_ptr<GameObject> go (new GameObject());
+	GameObject* go = new GameObject();
 	std::string s = "assets/img/ocean.jpg";
 	bg = new Sprite(*go, s);
 	bg->Render();
-	objectArray.emplace_back(go);
+	objectArray.emplace_back(std::unique_ptr<GameObject>(go));
 	std::string m = "assets/audio/stageState.ogg";
 	music = new Music(m);
 	quitRequested = false;
@@ -15,6 +15,10 @@ State::~State() {
 	delete bg;
 	delete music;
 	delete &quitRequested;
+	for (int i=objectArray.size(); i>0; i--) {
+		objectArray[i-1].release();
+		objectArray.erase(objectArray.begin() + i - 1);
+	}
 	objectArray.clear();
 }
 
@@ -87,7 +91,7 @@ void State::AddObject(int mouseX, int mouseY){
 	double ang = (double) -PI + PI*(rand() % 1001)/500.0;
 	Vec2 rot = prov.GetRotated(ang);
 
-	std::unique_ptr<GameObject> go (new GameObject());
+	GameObject* go = new GameObject();
 
 	std::string sp = "assets/img/penguinface.png";
 	std::unique_ptr<Sprite> spr (new Sprite(*go, sp));
@@ -101,7 +105,7 @@ void State::AddObject(int mouseX, int mouseY){
 
 	std::unique_ptr<Face> fc (new Face(*go));
 	go->AddComponent(std::move(fc));
-	objectArray.emplace_back(go);
+	objectArray.emplace_back(std::unique_ptr<GameObject>(go));
 
 //	std::cout<<"print state addobject final"<<std::endl;
 //	std::cout<<go->IsDead()<<std::endl;
@@ -127,8 +131,7 @@ void State::Update(float dt){
 	}
 	for (int i=0; i<len; i++) {
 		if (objectArray[i].get()->IsDead()) {
-//			objectArray[i].release();
-			objectArray[i].reset(nullptr);
+			objectArray[i].release();
 			objectArray.erase(objectArray.begin()+i);
 		}
 	}
@@ -137,7 +140,6 @@ void State::Update(float dt){
 void State::Render(){
 	int len = objectArray.size();
 	for (int i=0; i<len; i++) {
-//		std::unique_ptr<GameObject> go (objectArray[i].get());
 		objectArray[i].get()->Render();
 	}
 }

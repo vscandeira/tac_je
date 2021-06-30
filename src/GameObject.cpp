@@ -9,8 +9,9 @@ GameObject::GameObject() {
 }
 
 GameObject::~GameObject() {
-	for (int i=components.size(); i>0; i--) {
-		components[i].release();
+	int len = components.size();
+	for (int i=len; i>0; i--) {
+		components[i-1].release();
 		components.erase(components.begin() + i - 1);
 	}
 	components.clear();
@@ -36,7 +37,7 @@ void GameObject::RequestDelete(){
 	isDead = true;
 }
 void GameObject::AddComponent(std::unique_ptr<Component> cpt){
-	components.emplace_back(cpt);
+	components.push_back(std::move(cpt));
 }
 void GameObject::RemoveComponent(std::unique_ptr<Component> cpt){
 	int len = components.size();
@@ -44,11 +45,6 @@ void GameObject::RemoveComponent(std::unique_ptr<Component> cpt){
 		if(components[i] == cpt){
 			components[i].release();
 			components.erase(components.begin()+i);
-			for (int j = i+1; j<len; j++) {
-				components[j-1] = components[j];
-			}
-			components[len-1].release();
-			components.erase(components.begin()+len-1);
 			break;
 		}
 	}
@@ -57,7 +53,7 @@ void GameObject::RemoveComponent(std::unique_ptr<Component> cpt){
 
 Component* GameObject::GetComponent(std::string type){
 	Component* retorno = nullptr;
-	int len = components.size();
+	/*int len = components.size();
 	for (int i = 0; i<len; i++) {
 		if (components[i]->Is(type)){
 			if (type.compare("Sound")==0) {
@@ -72,7 +68,7 @@ Component* GameObject::GetComponent(std::string type){
 			}
 			break;
 		}
-	}
+	}*/
 	return retorno;
 }
 

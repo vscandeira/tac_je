@@ -8,7 +8,6 @@
 #include "Face.h"
 
 Face::Face(GameObject& associated): Component(associated) {
-	//construir mãe
 	hitpoints = 30;
 
 }
@@ -20,10 +19,9 @@ Face::~Face() {
 void Face::Damage(int damage){
 	hitpoints -= damage;
 	if (hitpoints <= 0) {
-		std::string f = "Sound";
-		if (associated.GetComponent(f) != nullptr) {
-			std::unique_ptr<Component> cpt = associated.GetComponent(f);
-			std::unique_ptr<Sound> sound = std::make_unique<Sound>(cpt);
+		std::string s = "Sound";
+		if (associated.GetComponent(s) != nullptr) {
+			Sound* sound = (Sound*)associated.GetComponent(s);
 			sound->Play();
 		}
 		associated.RequestDelete();
