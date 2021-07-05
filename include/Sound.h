@@ -1,15 +1,6 @@
-/*
- * Sound.h
- *
- *  Created on: 2 de abr de 2021
- *      Author: Victor Santos Candeira
- */
-
 #ifndef SOUND_H_
 #define SOUND_H_
 
-#include <iostream>
-#include <memory>
 #include <string>
 
 #define INCLUDE_SDL
@@ -17,7 +8,6 @@
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
 #include "Component.h"
-//#include "GameObject.h"
 
 class GameObject;
 

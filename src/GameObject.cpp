@@ -1,8 +1,4 @@
-
-#include "GameObject.h"
-#include "Face.h"
-#include "Sound.h"
-#include "Sprite.h"
+#include "Component.h"
 
 GameObject::GameObject() {
 	isDead = false;
@@ -36,10 +32,12 @@ bool GameObject::IsDead(){
 void GameObject::RequestDelete(){
 	isDead = true;
 }
-void GameObject::AddComponent(std::unique_ptr<Component> cpt){
-	components.push_back(std::move(cpt));
+
+void GameObject::AddComponent(Component* cpt){
+	components.push_back(std::unique_ptr<Component> (cpt));
 }
-void GameObject::RemoveComponent(std::unique_ptr<Component> cpt){
+
+void GameObject::RemoveComponent(Component* cpt){
 	int len = components.size();
 	for (int i=0; i<len; i++) {
 		if(components[i] == cpt){
@@ -53,18 +51,15 @@ void GameObject::RemoveComponent(std::unique_ptr<Component> cpt){
 
 Component* GameObject::GetComponent(std::string type){
 	Component* retorno = nullptr;
-	/*int len = components.size();
+/*	int len = components.size();
 	for (int i = 0; i<len; i++) {
 		if (components[i]->Is(type)){
 			if (type.compare("Sound")==0) {
 				retorno = (Sound*) components[i];
-//				return std::unique_ptr<Sound> (components[i]);
 			} else if (type.compare("Face")==0) {
 				retorno = (Face*) components[i];
-//				return std::unique_ptr<Face> (components[i]);
 			} else if (type.compare("Sprite")==0) {
 				retorno = (Sprite*) components[i];
-//				return std::unique_ptr<Sprite> (components[i]);
 			}
 			break;
 		}

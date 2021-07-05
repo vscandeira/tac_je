@@ -1,24 +1,9 @@
-/*
- * Face.h
- *
- *  Created on: 3 de abr de 2021
- *      Author: Victor Santos Candeira
- */
-
 #ifndef FACE_H_
 #define FACE_H_
 
-#include <iostream>
 #include <string>
-#include <memory>
 
-#define INCLUDE_SDL
-#define INCLUDE_SDL_IMAGE
-#define INCLUDE_SDL_MIXER
-#include "SDL_include.h"
 #include "Component.h"
-#include "GameObject.h"
-#include "Sound.h"
 
 class Face : public Component {
 private:

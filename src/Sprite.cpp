@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Sprite.h"
 #include "Game.h"
 

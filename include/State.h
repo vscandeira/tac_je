@@ -1,25 +1,12 @@
 #ifndef STATE_H_
 #define STATE_H_
 
-#include <iostream>
-#include <string>
 #include <vector>
 #include <memory>
-#include <cmath>
 
-#define INCLUDE_SDL
-#define cndaINCLUDE_SDL_IMAGE
-#define INCLUDE_SDL_MIXER
-#include "SDL_include.h"
-
-#include "Component.h"
 #include "GameObject.h"
 #include "Music.h"
 #include "Sprite.h"
-#include "Sound.h"
-#include "Face.h"
-#include "Vec2.h"
-#include "Rect.h"
 
 class State {
 private:

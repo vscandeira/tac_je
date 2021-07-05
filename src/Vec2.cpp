@@ -1,9 +1,5 @@
-/*
- * Vec2.cpp
- *
- *  Created on: 3 de abr de 2021
- *      Author: Victor Santos Candeira
- */
+#include <cmath>
+#include <iostream>
 
 #include "Vec2.h"
 

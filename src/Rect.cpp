@@ -1,10 +1,3 @@
-/*
- * Rect.cpp
- *
- *  Created on: 2 de abr de 2021
- *      Author: Victor Santos Candeira
- */
-
 #include "Rect.h"
 
 Rect::Rect() {

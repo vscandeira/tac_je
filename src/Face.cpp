@@ -1,11 +1,6 @@
-/*
- * Face.cpp
- *
- *  Created on: 3 de abr de 2021
- *      Author: Victor Santos Candeira
- */
-
 #include "Face.h"
+#include "Sound.h"
+#include "GameObject.h"
 
 Face::Face(GameObject& associated): Component(associated) {
 	hitpoints = 30;

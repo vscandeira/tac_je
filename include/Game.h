@@ -1,16 +1,11 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include <iostream>
 #include <string>
-#include <ctime>
-#include <cstdlib>
-
 #define INCLUDE_SDL
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 #include "SDL_include.h"
-
 #include "State.h"
 
 void printError(const char* erro, std::string debug);

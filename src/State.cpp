@@ -1,10 +1,25 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+
+#define INCLUDE_SDL
+#define INCLUDE_SDL_IMAGE
+#define INCLUDE_SDL_MIXER
+#include "SDL_include.h"
+
 #include "State.h"
+#include "Sound.h"
+#include "Face.h"
+#include "Vec2.h"
+#include "Rect.h"
+
 
 State::State() {
 	GameObject* go = new GameObject();
 	std::string s = "assets/img/ocean.jpg";
 	bg = new Sprite(*go, s);
 	bg->Render();
+	go->AddComponent(bg);
 	objectArray.emplace_back(std::unique_ptr<GameObject>(go));
 	std::string m = "assets/audio/stageState.ogg";
 	music = new Music(m);
@@ -94,24 +109,20 @@ void State::AddObject(int mouseX, int mouseY){
 	GameObject* go = new GameObject();
 
 	std::string sp = "assets/img/penguinface.png";
-	std::unique_ptr<Sprite> spr (new Sprite(*go, sp));
+	Sprite* spr = new Sprite(*go, sp);
 	Rect* r = new Rect( (float) mouseX/*-(spr->GetWidth()/2)*/, (float) mouseY/*-(spr->GetHeight()/2)*/, (float) spr->GetWidth(), (float) spr->GetHeight() );
 	go->box = *r;
-	go->AddComponent(std::move(spr));
+	go->AddComponent(spr);
 
 	std::string sd = "assets/audio/boom.wav";
-	std::unique_ptr<Sound> snd (new Sound(*go, sd));
-	go->AddComponent(std::move(snd));
+	Sound* snd = new Sound(*go, sd);
+	go->AddComponent(snd);
 
-	std::unique_ptr<Face> fc (new Face(*go));
-	go->AddComponent(std::move(fc));
+	Face* fc = new Face(*go);
+	go->AddComponent(fc);
 	objectArray.emplace_back(std::unique_ptr<GameObject>(go));
 
-//	std::cout<<"print state addobject final"<<std::endl;
-//	std::cout<<go->IsDead()<<std::endl;
-//	std::cout<<objectArray.size()<<std::endl;
 	return;
-//	std::cout<<"print state addobject final2"<<std::endl;
 }
 
 bool State::QuitRequested() const{

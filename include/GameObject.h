@@ -2,17 +2,11 @@
 #ifndef GAMEOBJECT_H_
 #define GAMEOBJECT_H_
 
-#include <iostream>
 #include <string>
 #include <vector>
 #include <memory>
-
-#define INCLUDE_SDL
-#define INCLUDE_SDL_IMAGE
-#define INCLUDE_SDL_MIXER
-#include "SDL_include.h"
 #include "Rect.h"
-//#include "Component.h"
+#include "GameObject.h"
 
 class Component;
 
@@ -29,12 +23,10 @@ public:
 	void Render();
 	bool IsDead();
 	void RequestDelete();
-	void AddComponent(std::unique_ptr<Component> cpt);
-	void RemoveComponent(std::unique_ptr<Component> cpt);
+	void AddComponent(Component* cpt);
+	void RemoveComponent(Component* cpt);
 //	std::unique_ptr<Component> GetComponent(std::string type);
 	Component* GetComponent(std::string type);
-//	GameObject(const GameObject&) = delete;
-//	GameObject(GameObject&&) = default;
 
 };
 
