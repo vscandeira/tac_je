@@ -1,4 +1,7 @@
 #include "Component.h"
+#include "Sound.h"
+#include "Face.h"
+#include "Sprite.h"
 
 GameObject::GameObject() {
 	isDead = false;
@@ -40,7 +43,7 @@ void GameObject::AddComponent(Component* cpt){
 void GameObject::RemoveComponent(Component* cpt){
 	int len = components.size();
 	for (int i=0; i<len; i++) {
-		if(components[i] == cpt){
+		if(components[i].get() == cpt){
 			components[i].release();
 			components.erase(components.begin()+i);
 			break;
@@ -48,42 +51,25 @@ void GameObject::RemoveComponent(Component* cpt){
 	}
 }
 
-
+//std::unique_ptr<Component> GameObject::GetComponent(std::string type){
 Component* GameObject::GetComponent(std::string type){
+//	std::unique_ptr<Component> retorno = nullptr;
 	Component* retorno = nullptr;
-/*	int len = components.size();
-	for (int i = 0; i<len; i++) {
-		if (components[i]->Is(type)){
-			if (type.compare("Sound")==0) {
-				retorno = (Sound*) components[i];
-			} else if (type.compare("Face")==0) {
-				retorno = (Face*) components[i];
-			} else if (type.compare("Sprite")==0) {
-				retorno = (Sprite*) components[i];
-			}
-			break;
-		}
-	}*/
-	return retorno;
-}
-
-/*
-std::unique_ptr<Component> GameObject::GetComponent(std::string type){
-	std::unique_ptr<Component> retorno = nullptr;
 	int len = components.size();
 	for (int i = 0; i<len; i++) {
 		if (components[i]->Is(type)){
 			if (type.compare("Sound")==0) {
-				retorno.reset(components[i]);
-//				return std::unique_ptr<Sound> (components[i]);
+//				return std::unique_ptr<Sound> ((Sound*) components[i].get());
+				return (Sound*) components[i].get();
 			} else if (type.compare("Face")==0) {
-//				return std::unique_ptr<Face> (components[i]);
+//				return std::unique_ptr<Face> ((Face*) components[i].get());
+				return (Face*) components[i].get();
 			} else if (type.compare("Sprite")==0) {
-//				return std::unique_ptr<Sprite> (components[i]);
+//				return std::unique_ptr<Sprite> ((Sprite*) components[i].get());
+				return (Sprite*) components[i].get();
 			}
 			break;
 		}
 	}
 	return retorno;
 }
-*/

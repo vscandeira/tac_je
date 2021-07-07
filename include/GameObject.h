@@ -27,7 +27,6 @@ public:
 	void RemoveComponent(Component* cpt);
 //	std::unique_ptr<Component> GetComponent(std::string type);
 	Component* GetComponent(std::string type);
-
 };
 
 #endif /* GAMEOBJECT_H_ */

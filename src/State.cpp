@@ -43,23 +43,20 @@ void State::Input(){
 	int mouseX, mouseY;
 
 	// Obtenha as coordenadas do mouse
-	//SDL_PumpEvents();
 	SDL_GetMouseState(&mouseX, &mouseY);
-	std::cout<<"print state input 1: "<< mouseX << " - " << mouseY <<std::endl;
-	AddObject(mouseX+200, mouseY+200);
-	std::cout<<"print state input 2"<<std::endl;
 
 	// SDL_PollEvent retorna 1 se encontrar eventos, zero caso contrário
 	while (SDL_PollEvent(&event)) {
 
 		// Se o evento for quit, setar a flag para terminação
 		if(event.type == SDL_QUIT) {
+			std::cout<<"\nState Input: SDL_QUIT\n";
 			quitRequested = true;
 		}
 
 		// Se o evento for clique...
 		if(event.type == SDL_MOUSEBUTTONDOWN) {
-
+			std::cout<<"\nState Input: SDL_MOUSEBUTTONDOWN\n";
 			// Percorrer de trás pra frente pra sempre clicar no objeto mais de cima
 			for(int i = objectArray.size() - 1; i >= 0; --i) {
 				// Obtem o ponteiro e casta pra Face.
@@ -72,11 +69,6 @@ void State::Input(){
 
 				if(go->box.Contains( {(float)mouseX, (float)mouseY} ) ) {
 					Face* face = (Face*)go->GetComponent( "Face" );
-//					std::unique_ptr<Face> face (go->GetComponent( "Face" ));
-//					std::unique_ptr<Component> comp (go->GetComponent( "Face" ));
-//					std::unique_ptr<Face> face ( dynamic_cast<Face*> ( comp.get() ) );
-//					Face* face = dynamic_cast<Face*> (comp.get());
-//					Face* face = dynamic_cast<Face*> (go->GetComponent( "Face" ));
 					if ( nullptr != face ) {
 						// Aplica dano
 						face->Damage(std::rand() % 10 + 10);
@@ -87,13 +79,17 @@ void State::Input(){
 			}
 		}
 		if( event.type == SDL_KEYDOWN ) {
+			std::cout<<"\nState Input: SDL_KEYDOWN\n";
 			// Se a tecla for ESC, setar a flag de quit
 			if( event.key.keysym.sym == SDLK_ESCAPE ) {
+				std::cout<<"\nState Input: SDLK_ESCAPE\n";
 				quitRequested = true;
 			}
 			// Se não, crie um objeto
 			else {
-				Vec2 objPos = Vec2( 200, 0 ).GetRotated( (double) -PI + PI*(rand() % 1001)/500.0 ) + Vec2( mouseX, mouseY );
+				std::cout<<"\nState Input: SDL else KEYDOWN\n";
+				Vec2 objPos = Vec2( 200, 0 ).GetRotated( -PI + PI*(rand() % 1001)/500.0 ) + Vec2( mouseX, mouseY );
+				std::cout<<"\nState Input: SDL else KEYDOWN Vec2 created\n";
 				AddObject((int)objPos.x, (int)objPos.y);
 			}
 		}
@@ -102,26 +98,34 @@ void State::Input(){
 
 void State::AddObject(int mouseX, int mouseY){
 	double PI = M_PI;
-	Vec2 prov = Vec2( mouseX, mouseY );
-	double ang = (double) -PI + PI*(rand() % 1001)/500.0;
-	Vec2 rot = prov.GetRotated(ang);
+	Vec2 rot = Vec2( mouseX, mouseY ).GetRotated(-PI + PI*(rand() % 1001)/500.0);
 
 	GameObject* go = new GameObject();
+	std::cout<<"\nState AddObject: go created \n";
 
 	std::string sp = "assets/img/penguinface.png";
 	Sprite* spr = new Sprite(*go, sp);
-	Rect* r = new Rect( (float) mouseX/*-(spr->GetWidth()/2)*/, (float) mouseY/*-(spr->GetHeight()/2)*/, (float) spr->GetWidth(), (float) spr->GetHeight() );
-	go->box = *r;
+	std::cout<<"\nState AddObject: sprite created \n";
 	go->AddComponent(spr);
+	std::cout<<"\nState AddObject: sprite added \n";
+	Rect* r = new Rect( (float) mouseX/*-(spr->GetWidth()/2)*/, (float) mouseY/*-(spr->GetHeight()/2)*/, (float) spr->GetWidth(), (float) spr->GetHeight() );
+	std::cout<<"\nState AddObject: rect created \n";
+	go->box = *r;
 
 	std::string sd = "assets/audio/boom.wav";
 	Sound* snd = new Sound(*go, sd);
+	std::cout<<"\nState AddObject: sound created \n";
 	go->AddComponent(snd);
+	std::cout<<"\nState AddObject: sound added \n";
 
 	Face* fc = new Face(*go);
+	std::cout<<"\nState AddObject: face created \n";
 	go->AddComponent(fc);
+	std::cout<<"\nState AddObject: face added \n";
 	objectArray.emplace_back(std::unique_ptr<GameObject>(go));
+	std::cout<<"\nState AddObject: go emplaced\n";
 
+	std::cout<<"\nState AddObject: mouseX "<<mouseX<<" - mouse Y "<<mouseY<<"\n\n";
 	return;
 }
 
