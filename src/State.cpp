@@ -20,7 +20,7 @@ State::State() {
 	bg = new Sprite(*go, s);
 	bg->Render();
 	go->AddComponent(bg);
-	objectArray.emplace_back(std::unique_ptr<GameObject>(go));
+	objectArray.push_back(std::unique_ptr<GameObject>(go));
 	std::string m = "assets/audio/stageState.ogg";
 	music = new Music(m);
 	quitRequested = false;
