@@ -24,7 +24,18 @@ Vec2 Vec2::GetRotated( double ang ){
 	return Vec2( (float) cos_ang*x + sin_ang*y, (float) cos_ang*y - sin_ang*x);
 }
 
+
 Vec2 Vec2::operator+(Vec2 v) {
 	std::cout<<"\nVec2 operator+"<< std::endl;
 	return Vec2(this->x + v.x, this->y + v.y);
 }
+/*
+Vec2& Vec2::operator+(const Vec2& v) {
+	std::cout<<"\nVec2 operator+"<< std::endl;
+	float new_x = this->x + v.x;
+	float new_y = this->y + v.y;
+	Vec2* v_2 = new Vec2(new_x, new_y);
+//	return Vec2(this->x + v.x, this->y + v.y);
+	return *v_2;
+}
+*/
