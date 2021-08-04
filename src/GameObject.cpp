@@ -14,7 +14,6 @@ GameObject::~GameObject() {
 		components.erase(components.begin() + i - 1);
 	}
 	components.clear();
-	delete &isDead;
 }
 
 void GameObject::Update(float dt){

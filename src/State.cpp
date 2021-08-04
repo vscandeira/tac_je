@@ -29,7 +29,6 @@ State::State() {
 State::~State() {
 	delete bg;
 	delete music;
-	delete &quitRequested;
 	for (int i=objectArray.size(); i>0; i--) {
 		objectArray[i-1].release();
 		objectArray.erase(objectArray.begin() + i - 1);

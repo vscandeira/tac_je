@@ -7,9 +7,7 @@ Face::Face(GameObject& associated): Component(associated) {
 
 }
 
-Face::~Face() {
-	delete &hitpoints;
-}
+Face::~Face() {}
 
 void Face::Damage(int damage){
 	hitpoints -= damage;

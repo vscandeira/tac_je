@@ -17,10 +17,6 @@ Sprite::Sprite(GameObject& associated, std::string file) : Component(associated)
 Sprite::~Sprite() {
 	if(IsOpen()){
 		SDL_DestroyTexture(texture);
-		delete &width;
-		delete &height;
-		delete &clipRect;
-
 	}
 }
 

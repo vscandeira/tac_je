@@ -56,6 +56,7 @@ Game::~Game() {
 	Mix_CloseAudio();
 	Mix_Quit();
 	IMG_Quit();
+	delete instance;
 }
 
 void Game::Run(){
