@@ -70,7 +70,10 @@ void State::Input(){
 					Face* face = (Face*)go->GetComponent( "Face" );
 					if ( nullptr != face ) {
 						// Aplica dano
+						//face->Damage(std::rand() % 10 + 10);
+						int damage = std::rand() % 10 + 10;
 						face->Damage(std::rand() % 10 + 10);
+						std::cout<<"Dano aplicado: "<<damage<<std::endl;
 						// Sai do loop (só queremos acertar um)
 						break;
 					}
@@ -100,31 +103,23 @@ void State::AddObject(int mouseX, int mouseY){
 	Vec2 rot = Vec2( mouseX, mouseY ).GetRotated(-PI + PI*(rand() % 1001)/500.0);
 
 	GameObject* go = new GameObject();
-	std::cout<<"\nState AddObject: go created \n";
 
 	std::string sp = "assets/img/penguinface.png";
 	Sprite* spr = new Sprite(*go, sp);
-	std::cout<<"\nState AddObject: sprite created \n";
 	go->AddComponent(spr);
-	std::cout<<"\nState AddObject: sprite added \n";
 	Rect* r = new Rect( (float) mouseX/*-(spr->GetWidth()/2)*/, (float) mouseY/*-(spr->GetHeight()/2)*/, (float) spr->GetWidth(), (float) spr->GetHeight() );
-	std::cout<<"\nState AddObject: rect created \n";
 	go->box = *r;
 
 	std::string sd = "assets/audio/boom.wav";
 	Sound* snd = new Sound(*go, sd);
-	std::cout<<"\nState AddObject: sound created \n";
 	go->AddComponent(snd);
-	std::cout<<"\nState AddObject: sound added \n";
 
 	Face* fc = new Face(*go);
-	std::cout<<"\nState AddObject: face created \n";
 	go->AddComponent(fc);
-	std::cout<<"\nState AddObject: face added \n";
 	objectArray.emplace_back(std::unique_ptr<GameObject>(go));
 	std::cout<<"\nState AddObject: go emplaced\n";
 
-	std::cout<<"\nState AddObject: mouseX "<<mouseX<<" - mouse Y "<<mouseY<<"\n\n";
+	std::cout<<"State AddObject: mouseX "<<mouseX<<" - mouse Y "<<mouseY<<"\n";
 	return;
 }
 
