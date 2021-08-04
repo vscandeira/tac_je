@@ -18,8 +18,8 @@ Rect::~Rect() {}
 
 bool Rect::Contains( std::array<float, 2> arr ){
 	bool retorno = false;
-	if (this->x == arr[0]) {
-		if (this->y == arr[1]) {
+	if ( (arr[0] >= (this->x-this->w/2) ) && (arr[0] <= (this->x+this->w/2) ) ) {
+		if ( (arr[1] >= (this->y-this->h/2) ) && (arr[1] <= (this->y+this->h/2) ) ) {
 			retorno = true;
 		}
 	}

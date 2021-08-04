@@ -4,7 +4,6 @@
 
 Face::Face(GameObject& associated): Component(associated) {
 	hitpoints = 30;
-
 }
 
 Face::~Face() {}

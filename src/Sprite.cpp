@@ -5,13 +5,13 @@
 
 Sprite::Sprite(GameObject& associated) : Component(associated) {
 	texture = nullptr;
-	width = associated.box.w;
-	height = associated.box.h;
+	width = 0;
+	height = 0;
 }
 Sprite::Sprite(GameObject& associated, std::string file) : Component(associated){
 	texture = nullptr;
-	width = associated.box.w;
-	height = associated.box.h;
+	width = 0;
+	height = 0;
 	Open(file);
 }
 Sprite::~Sprite() {
@@ -52,10 +52,19 @@ void Sprite::Render(){
 	SDL_Renderer* renderer = Game::GetInstance().GetRenderer();
 
 	SDL_Rect dstRect;
-	dstRect.x = associated.box.x;
-	dstRect.y = associated.box.y;
-	dstRect.w = clipRect.w;
-	dstRect.h = clipRect.h;
+	if (this->width==1024 && this->height==600) {
+		//imagem background
+		dstRect.x = associated.box.x;
+		dstRect.y = associated.box.y;
+		dstRect.w = this->width;
+		dstRect.h = this->height;
+	} else {
+		//imagem gos
+		dstRect.x = associated.box.x - this->width/2;
+		dstRect.y = associated.box.y - this->height/2;
+		dstRect.w = this->width;
+		dstRect.h = this->height;
+	}
 
 	if ( SDL_RenderCopy(renderer, texture, &clipRect, &dstRect) != 0) {
 		printError(SDL_GetError(),"Sprite SDL_RenderCopy");

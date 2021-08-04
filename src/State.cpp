@@ -55,9 +55,10 @@ void State::Input(){
 
 		// Se o evento for clique...
 		if(event.type == SDL_MOUSEBUTTONDOWN) {
-			std::cout<<"\nState Input: SDL_MOUSEBUTTONDOWN\n";
+			std::cout<<"\nState Input: SDL_MOUSEBUTTONDOWN - X: " <<mouseX << " - Y: "<<mouseY<< "\n";
 			// Percorrer de trás pra frente pra sempre clicar no objeto mais de cima
 			for(int i = objectArray.size() - 1; i >= 0; --i) {
+//				std::cout<<"State Input: SDL_MOUSEBUTTONDOWN - Percorrendo vetor de objetos - Objeto: " << i << "\n";
 				// Obtem o ponteiro e casta pra Face.
 				GameObject* go = (GameObject*) objectArray[i].get();
 				// Nota: Desencapsular o ponteiro é algo que devemos evitar ao máximo.
@@ -67,6 +68,7 @@ void State::Input(){
 				// chamar funções de GameObjects, use objectArray[i]->função() direto.
 
 				if(go->box.Contains( {(float)mouseX, (float)mouseY} ) ) {
+					std::cout<<"Hit"<<std::endl;
 					Face* face = (Face*)go->GetComponent( "Face" );
 					if ( nullptr != face ) {
 						// Aplica dano
@@ -84,14 +86,13 @@ void State::Input(){
 			std::cout<<"\nState Input: SDL_KEYDOWN\n";
 			// Se a tecla for ESC, setar a flag de quit
 			if( event.key.keysym.sym == SDLK_ESCAPE ) {
-				std::cout<<"\nState Input: SDLK_ESCAPE\n";
+				std::cout<<"State Input: SDLK_ESCAPE\n";
 				quitRequested = true;
 			}
 			// Se não, crie um objeto
 			else {
-				std::cout<<"\nState Input: SDL else KEYDOWN\n";
+				std::cout<<"State Input: SDL else KEYDOWN\n";
 				Vec2 objPos = Vec2( 200, 0 ).GetRotated( -PI + PI*(rand() % 1001)/500.0 ) + Vec2( mouseX, mouseY );
-				std::cout<<"\nState Input: SDL else KEYDOWN Vec2 created\n";
 				AddObject((int)objPos.x, (int)objPos.y);
 			}
 		}
@@ -99,15 +100,12 @@ void State::Input(){
 }
 
 void State::AddObject(int mouseX, int mouseY){
-	double PI = M_PI;
-	Vec2 rot = Vec2( mouseX, mouseY ).GetRotated(-PI + PI*(rand() % 1001)/500.0);
-
 	GameObject* go = new GameObject();
 
 	std::string sp = "assets/img/penguinface.png";
 	Sprite* spr = new Sprite(*go, sp);
+	Rect* r = new Rect( (float) mouseX-(spr->GetWidth()/2), (float) mouseY-(spr->GetHeight()/2), (float) spr->GetWidth(), (float) spr->GetHeight() );
 	go->AddComponent(spr);
-	Rect* r = new Rect( (float) mouseX/*-(spr->GetWidth()/2)*/, (float) mouseY/*-(spr->GetHeight()/2)*/, (float) spr->GetWidth(), (float) spr->GetHeight() );
 	go->box = *r;
 
 	std::string sd = "assets/audio/boom.wav";
@@ -119,7 +117,7 @@ void State::AddObject(int mouseX, int mouseY){
 	objectArray.emplace_back(std::unique_ptr<GameObject>(go));
 	std::cout<<"\nState AddObject: go emplaced\n";
 
-	std::cout<<"State AddObject: mouseX "<<mouseX<<" - mouse Y "<<mouseY<<"\n";
+	std::cout<<"State AddObject: boxX: "<<go->box.x<<" - boxY: "<<go->box.y<<" - boxW: "<<go->box.w<<" - boxW: "<<go->box.w<<"\n";
 	return;
 }
 
