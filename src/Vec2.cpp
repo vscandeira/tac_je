@@ -11,8 +11,6 @@ Vec2::Vec2(float x, float y) {
 }
 
 Vec2::~Vec2() {
-	delete &x;
-	delete &y;
 	std::cout<<"\nVec2 Destructor\n";
 }
 
