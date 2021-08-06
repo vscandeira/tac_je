@@ -58,7 +58,6 @@ void State::Input(){
 			std::cout<<"\nState Input: SDL_MOUSEBUTTONDOWN - X: " <<mouseX << " - Y: "<<mouseY<< "\n";
 			// Percorrer de trás pra frente pra sempre clicar no objeto mais de cima
 			for(int i = objectArray.size() - 1; i >= 0; --i) {
-//				std::cout<<"State Input: SDL_MOUSEBUTTONDOWN - Percorrendo vetor de objetos - Objeto: " << i << "\n";
 				// Obtem o ponteiro e casta pra Face.
 				GameObject* go = (GameObject*) objectArray[i].get();
 				// Nota: Desencapsular o ponteiro é algo que devemos evitar ao máximo.
