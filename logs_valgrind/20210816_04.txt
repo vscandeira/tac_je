@@ -1,0 +1,116 @@
+==9147== Memcheck, a memory error detector
+==9147== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==9147== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==9147== Command: ./JOGO
+==9147== Parent PID: 4195
+==9147== 
+==9147== Syscall param sendmsg(msg.msg_iov[0]) points to uninitialised byte(s)
+==9147==    at 0x4E7777D: __libc_sendmsg (sendmsg.c:28)
+==9147==    by 0x4E7777D: sendmsg (sendmsg.c:25)
+==9147==    by 0x5A53D17: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==9147==    by 0x5A54328: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==9147==    by 0x5A545B6: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==9147==    by 0x5A54E1F: xcb_flush (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==9147==    by 0x7D2EFE0: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==9147==    by 0x7D2FFD9: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==9147==    by 0x7D2A07E: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==9147==    by 0x7D2ED58: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==9147==    by 0x7CCBB34: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==9147==    by 0x7CCC48F: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==9147==    by 0x92D860D: ??? (in /usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.470.57.02)
+==9147==  Address 0x69cf7cd is 4,557 bytes inside a block of size 21,168 alloc'd
+==9147==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==9147==    by 0x5A53884: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==9147==    by 0x5A57B72: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==9147==    by 0x50D9D29: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==9147==    by 0x50CA3A8: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==9147==    by 0x49488F3: ??? (in /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.10.0)
+==9147==    by 0x491BEBE: ??? (in /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.10.0)
+==9147==    by 0x488B8E6: ??? (in /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.10.0)
+==9147==    by 0x10AD73: Game::Game(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==    by 0x10B24C: Game::GetInstance() (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==    by 0x10EC77: main (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==  Uninitialised value was created by a stack allocation
+==9147==    at 0x7D2EB4F: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==9147== 
+==9147== Warning: unimplemented fcntl command: 1033
+==9147== Warning: unimplemented fcntl command: 1033
+==9147== Warning: unimplemented fcntl command: 1033
+==9147== Warning: unimplemented fcntl command: 1033
+==9147== Invalid read of size 1
+==9147==    at 0x10F61C: GameObject::IsDead() (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==    by 0x10C421: State::Update(float) (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==    by 0x10B396: Game::Run() (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==    by 0x10EC9D: main (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==  Address 0x18 is not stack'd, malloc'd or (recently) free'd
+==9147== 
+==9147== 
+==9147== Process terminating with default action of signal 11 (SIGSEGV)
+==9147==  Access not within mapped region at address 0x18
+==9147==    at 0x10F61C: GameObject::IsDead() (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==    by 0x10C421: State::Update(float) (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==    by 0x10B396: Game::Run() (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==    by 0x10EC9D: main (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==  If you believe this happened as a result of a stack
+==9147==  overflow in your program's main thread (unlikely but
+==9147==  possible), you can try to increase the size of the
+==9147==  main thread stack using the --main-stacksize= flag.
+==9147==  The main thread stack size used in this run was 8388608.
+==9147== 
+==9147== HEAP SUMMARY:
+==9147==     in use at exit: 14,539,210 bytes in 6,025 blocks
+==9147==   total heap usage: 35,289 allocs, 29,264 frees, 2,130,472,702 bytes allocated
+==9147== 
+==9147== LEAK SUMMARY:
+==9147==    definitely lost: 7,496 bytes in 16 blocks
+==9147==    indirectly lost: 1,360,075 bytes in 773 blocks
+==9147==      possibly lost: 3,723,512 bytes in 56 blocks
+==9147==    still reachable: 9,448,127 bytes in 5,180 blocks
+==9147==                       of which reachable via heuristic:
+==9147==                         newarray           : 1,552 bytes in 17 blocks
+==9147==                         multipleinheritance: 104 bytes in 1 blocks
+==9147==         suppressed: 0 bytes in 0 blocks
+==9147== Rerun with --leak-check=full to see details of leaked memory
+==9147== 
+==9147== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==9147== 
+==9147== 1 errors in context 1 of 2:
+==9147== Invalid read of size 1
+==9147==    at 0x10F61C: GameObject::IsDead() (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==    by 0x10C421: State::Update(float) (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==    by 0x10B396: Game::Run() (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==    by 0x10EC9D: main (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==  Address 0x18 is not stack'd, malloc'd or (recently) free'd
+==9147== 
+==9147== 
+==9147== 1 errors in context 2 of 2:
+==9147== Syscall param sendmsg(msg.msg_iov[0]) points to uninitialised byte(s)
+==9147==    at 0x4E7777D: __libc_sendmsg (sendmsg.c:28)
+==9147==    by 0x4E7777D: sendmsg (sendmsg.c:25)
+==9147==    by 0x5A53D17: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==9147==    by 0x5A54328: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==9147==    by 0x5A545B6: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==9147==    by 0x5A54E1F: xcb_flush (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==9147==    by 0x7D2EFE0: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==9147==    by 0x7D2FFD9: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==9147==    by 0x7D2A07E: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==9147==    by 0x7D2ED58: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==9147==    by 0x7CCBB34: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==9147==    by 0x7CCC48F: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==9147==    by 0x92D860D: ??? (in /usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.470.57.02)
+==9147==  Address 0x69cf7cd is 4,557 bytes inside a block of size 21,168 alloc'd
+==9147==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==9147==    by 0x5A53884: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==9147==    by 0x5A57B72: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==9147==    by 0x50D9D29: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==9147==    by 0x50CA3A8: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==9147==    by 0x49488F3: ??? (in /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.10.0)
+==9147==    by 0x491BEBE: ??? (in /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.10.0)
+==9147==    by 0x488B8E6: ??? (in /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.10.0)
+==9147==    by 0x10AD73: Game::Game(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==    by 0x10B24C: Game::GetInstance() (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==    by 0x10EC77: main (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==9147==  Uninitialised value was created by a stack allocation
+==9147==    at 0x7D2EB4F: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==9147== 
+==9147== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
