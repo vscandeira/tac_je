@@ -15,12 +15,13 @@
 
 
 State::State() {
-	GameObject* go = new GameObject();
+	GameObject* go_ptr = new GameObject();
+	std::unique_ptr<GameObject> go = std::unique_ptr<GameObject>(go_ptr);
 	std::string s = "assets/img/ocean.jpg";
 	bg = new Sprite(*go, s);
 	bg->Render();
 	go->AddComponent(bg);
-	objectArray.push_back(std::unique_ptr<GameObject>(go));
+	objectArray.push_back(std::move(go));
 	std::string m = "assets/audio/stageState.ogg";
 	music = new Music(m);
 	quitRequested = false;
@@ -99,7 +100,8 @@ void State::Input(){
 }
 
 void State::AddObject(int mouseX, int mouseY){
-	GameObject* go = new GameObject();
+	GameObject* go_ptr = new GameObject();
+	std::unique_ptr<GameObject> go = std::unique_ptr<GameObject>(go_ptr);
 
 	std::string sp = "assets/img/penguinface.png";
 	Sprite* spr = new Sprite(*go, sp);
@@ -113,10 +115,10 @@ void State::AddObject(int mouseX, int mouseY){
 
 	Face* fc = new Face(*go);
 	go->AddComponent(fc);
-	objectArray.emplace_back(std::unique_ptr<GameObject>(go));
-	std::cout<<"\nState AddObject: go emplaced\n";
+	objectArray.push_back(std::move(go));
+	std::cout<<"\nState AddObject: go pushed\n";
 
-	std::cout<<"State AddObject: boxX: "<<go->box.x<<" - boxY: "<<go->box.y<<" - boxW: "<<go->box.w<<" - boxW: "<<go->box.w<<"\n";
+	std::cout<<"State AddObject: boxX: "<<objectArray[objectArray.size()-1]->box.x<<" - boxY: "<<objectArray[objectArray.size()-1]->box.y<<" - boxW: "<<objectArray[objectArray.size()-1]->box.w<<" - boxW: "<<objectArray[objectArray.size()-1]->box.w<<"\n";
 	return;
 }
 

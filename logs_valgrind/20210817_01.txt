@@ -1,0 +1,75 @@
+==53243== Memcheck, a memory error detector
+==53243== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==53243== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==53243== Command: ./JOGO
+==53243== Parent PID: 4798
+==53243== 
+==53243== Syscall param sendmsg(msg.msg_iov[0]) points to uninitialised byte(s)
+==53243==    at 0x4E7777D: __libc_sendmsg (sendmsg.c:28)
+==53243==    by 0x4E7777D: sendmsg (sendmsg.c:25)
+==53243==    by 0x5A53D17: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==53243==    by 0x5A54328: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==53243==    by 0x5A545B6: ??? (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==53243==    by 0x5A54E1F: xcb_flush (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==53243==    by 0x7D2EFE0: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==53243==    by 0x7D2FFD9: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==53243==    by 0x7D2A07E: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==53243==    by 0x7D2ED58: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==53243==    by 0x7CCBB34: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==53243==    by 0x7CCC48F: ??? (in /usr/lib/x86_64-linux-gnu/libGLX_nvidia.so.470.57.02)
+==53243==    by 0x92D860D: ??? (in /usr/lib/x86_64-linux-gnu/libnvidia-glcore.so.470.57.02)
+==53243==  Address 0x69cf7cd is 4,557 bytes inside a block of size 21,168 alloc'd
+==53243==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==53243==    by 0x5A53884: xcb_connect_to_fd (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==53243==    by 0x5A57B72: xcb_connect_to_display_with_auth_info (in /usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0)
+==53243==    by 0x50D9D29: _XConnectXCB (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==53243==    by 0x50CA3A8: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
+==53243==    by 0x49488F3: ??? (in /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.10.0)
+==53243==    by 0x491BEBE: ??? (in /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.10.0)
+==53243==    by 0x488B8E6: ??? (in /usr/lib/x86_64-linux-gnu/libSDL2-2.0.so.0.10.0)
+==53243==    by 0x10AD73: Game::Game(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==53243==    by 0x10B24C: Game::GetInstance() (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==53243==    by 0x10EDE3: main (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==53243== 
+==53243== Warning: unimplemented fcntl command: 1033
+==53243== Warning: unimplemented fcntl command: 1033
+==53243== Warning: unimplemented fcntl command: 1033
+==53243== Warning: unimplemented fcntl command: 1033
+==53243== Invalid read of size 1
+==53243==    at 0x10F788: GameObject::IsDead() (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==53243==    by 0x10C553: State::Update(float) (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==53243==    by 0x10B396: Game::Run() (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==53243==    by 0x10EE09: main (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==53243==  Address 0x18 is not stack'd, malloc'd or (recently) free'd
+==53243== 
+==53243== 
+==53243== Process terminating with default action of signal 11 (SIGSEGV)
+==53243==  Access not within mapped region at address 0x18
+==53243==    at 0x10F788: GameObject::IsDead() (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==53243==    by 0x10C553: State::Update(float) (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==53243==    by 0x10B396: Game::Run() (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==53243==    by 0x10EE09: main (in /home/victor/eclipse-cpp-workspace/tac_je/JOGO)
+==53243==  If you believe this happened as a result of a stack
+==53243==  overflow in your program's main thread (unlikely but
+==53243==  possible), you can try to increase the size of the
+==53243==  main thread stack using the --main-stacksize= flag.
+==53243==  The main thread stack size used in this run was 8388608.
+==53243== 
+==53243== HEAP SUMMARY:
+==53243==     in use at exit: 11,883,271 bytes in 5,832 blocks
+==53243==   total heap usage: 31,806 allocs, 25,974 frees, 2,124,817,317 bytes allocated
+==53243== 
+==53243== LEAK SUMMARY:
+==53243==    definitely lost: 7,336 bytes in 10 blocks
+==53243==    indirectly lost: 748,363 bytes in 762 blocks
+==53243==      possibly lost: 2,952,028 bytes in 51 blocks
+==53243==    still reachable: 8,175,544 bytes in 5,009 blocks
+==53243==                       of which reachable via heuristic:
+==53243==                         newarray           : 1,552 bytes in 17 blocks
+==53243==                         multipleinheritance: 104 bytes in 1 blocks
+==53243==         suppressed: 0 bytes in 0 blocks
+==53243== Rerun with --leak-check=full to see details of leaked memory
+==53243== 
+==53243== Use --track-origins=yes to see where uninitialised values come from
+==53243== For lists of detected and suppressed errors, rerun with: -s
+==53243== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)

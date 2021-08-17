@@ -36,7 +36,8 @@ void GameObject::RequestDelete(){
 }
 
 void GameObject::AddComponent(Component* cpt){
-	components.push_back(std::unique_ptr<Component> (cpt));
+	std::unique_ptr<Component> cpt_uni = std::unique_ptr<Component> (cpt);
+	components.push_back(std::move(cpt_uni));
 }
 
 void GameObject::RemoveComponent(Component* cpt){
