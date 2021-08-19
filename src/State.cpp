@@ -105,7 +105,17 @@ void State::AddObject(int mouseX, int mouseY){
 
 	std::string sp = "assets/img/penguinface.png";
 	Sprite* spr = new Sprite(*go, sp);
-	Rect* r = new Rect( (float) mouseX-(spr->GetWidth()/2), (float) mouseY-(spr->GetHeight()/2), (float) spr->GetWidth(), (float) spr->GetHeight() );
+
+	float x = (mouseX>0) ? mouseX : 0;
+	float y = (mouseY>0) ? mouseY : 0;
+	if (x+spr->GetWidth() > 1024 ) {
+		x = (float) 1024-spr->GetWidth();
+	}
+	if (y+spr->GetHeight() > 600 ) {
+		y = (float) 600-spr->GetHeight();
+	}
+
+	Rect* r = new Rect( x, y, (float) spr->GetWidth(), (float) spr->GetHeight() );
 	go->AddComponent(spr);
 	go->box = *r;
 

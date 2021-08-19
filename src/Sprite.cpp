@@ -52,25 +52,17 @@ void Sprite::Render(){
 	SDL_Renderer* renderer = Game::GetInstance().GetRenderer();
 
 	SDL_Rect dstRect;
-	if (this->width==1024 && this->height==600) {
-		//imagem background
-		dstRect.x = associated.box.x;
-		dstRect.y = associated.box.y;
-		dstRect.w = this->width;
-		dstRect.h = this->height;
-	} else {
-		//imagem gos
-		dstRect.x = associated.box.x - this->width/2;
-		dstRect.y = associated.box.y - this->height/2;
-		dstRect.w = this->width;
-		dstRect.h = this->height;
-	}
+	dstRect.x = associated.box.x;
+	dstRect.y = associated.box.y;
+	dstRect.w = this->width;
+	dstRect.h = this->height;
 
 	if ( SDL_RenderCopy(renderer, texture, &clipRect, &dstRect) != 0) {
 		printError(SDL_GetError(),"Sprite SDL_RenderCopy");
 		return;
 	}
 	SDL_RenderPresent(renderer);
+//	delete renderer;
 }
 
 bool Sprite::Is(std::string type){
